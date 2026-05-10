@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>名代 キムラ（京都）｜暮らしと喫茶の手帖</title>
+  <meta name="description" content="京都の商店街で、気負わずにすき焼き。名代キムラの入口、のれん、鍋の景色と、旅の記憶。">
+
+  <style>
+    :root{
+      --bg:#faf7ef;
+      --ink:#222;
+      --card:#fff;
+      --mat:#fff8ea;
+      --line:rgba(0,0,0,.10);
+      --shadow:0 10px 24px rgba(0,0,0,.08);
+      --radius:18px;
+      --radius2:14px;
+    }
+
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--ink);
+      font-family: system-ui, -apple-system, "Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+      line-height:1.95;
+    }
+
+    main{
+      max-width:860px;
+      margin:0 auto;
+      padding:18px 16px 56px;
+    }
+
+    /* 上の戻るリンク */
+    .back{
+      margin:10px 0 18px;
+      font-size:14px;
+    }
+    .back a{
+      color:var(--ink);
+      text-decoration:none;
+      border-bottom:1px solid rgba(0,0,0,.25);
+      padding-bottom:2px;
+    }
+
+    /* 見出し */
+    h1{
+      margin:10px 0 14px;
+      font-size:26px;
+      letter-spacing:.02em;
+    }
+    .lead{
+      margin:0 0 18px;
+      color:rgba(0,0,0,.75);
+      font-size:14px;
+    }
+
+    /* 記事カード */
+    .card{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .mat{
+      padding:18px;
+      background:linear-gradient(180deg, var(--mat), rgba(255,248,234,0));
+      border-bottom:1px solid var(--line);
+    }
+
+    /* 記事本文 */
+    .article{
+      padding:18px;
+    }
+    .article p{
+      margin:0 0 14px;
+      font-size:16px;
+    }
+
+    /* 雑誌っぽい “文章の中の差し込み写真” */
+    figure.insert{
+      margin:10px 0 16px;
+    }
+
+    /* 画像本体（小さめ＋角丸＋枠） */
+    .photo{
+      display:block;
+      width:100%;
+      max-width:360px;          /* ← 小さめの上限 */
+      border-radius:var(--radius2);
+      border:1px solid var(--line);
+      box-shadow:0 8px 18px rgba(0,0,0,.08);
+      background:#fff;
+    }
+
+    /* PCは左右に回り込み（雑誌っぽい） */
+    @media (min-width: 760px){
+      figure.insert.left  { float:left;  margin:6px 18px 10px 0; }
+      figure.insert.right { float:right; margin:6px 0 10px 18px; }
+      figure.insert .photo{ max-width:340px; }
+    }
+
+    /* キャプション */
+    figcaption{
+      margin-top:8px;
+      font-size:12px;
+      color:rgba(0,0,0,.62);
+    }
+
+    /* クリックできる感じ */
+    .zoom{
+      display:inline-block;
+      text-decoration:none;
+      color:inherit;
+      cursor:zoom-in;
+    }
+
+    /* float解除 */
+    .clearfix::after{
+      content:"";
+      display:block;
+      clear:both;
+    }
+
+    /* 基本情報（箇条書き） */
+    .info{
+      margin-top:14px;
+      padding:16px;
+      border-top:1px solid var(--line);
+      background:rgba(255,255,255,.55);
+    }
+    .info h2{
+      font-size:15px;
+      margin:0 0 10px;
+    }
+    .info ul{
+      margin:0;
+      padding-left:18px;
+      font-size:14px;
+    }
+    .info li{
+      margin:6px 0;
+    }
+    .info a{
+      color:var(--ink);
+      text-decoration:none;
+      border-bottom:1px solid rgba(0,0,0,.25);
+      padding-bottom:2px;
+      word-break:break-word;
+    }
+
+    /* ====== 拡大表示（dialog） ====== */
+    dialog#lightbox{
+      width:min(92vw, 900px);
+      border:none;
+      border-radius:16px;
+      padding:0;
+      box-shadow:0 20px 60px rgba(0,0,0,.35);
+      background:#111;
+      color:#fff;
+    }
+    dialog#lightbox::backdrop{
+      background:rgba(0,0,0,.55);
+    }
+    .lb-wrap{
+      position:relative;
+      padding:10px;
+    }
+    #lbImg{
+      width:100%;
+      height:auto;
+      display:block;
+      border-radius:12px;
+      background:#000;
+    }
+    .lb-close{
+      position:absolute;
+      top:10px;
+      right:10px;
+      border:none;
+      background:rgba(255,255,255,.14);
+      color:#fff;
+      padding:10px 12px;
+      border-radius:999px;
+      cursor:pointer;
+      font-size:14px;
+    }
+    .lb-cap{
+      padding:10px 12px 14px;
+      font-size:13px;
+      color:rgba(255,255,255,.85);
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <p class="back"><a href="../index.html">← トップへ戻る</a></p>
+
+    <h1>名代 キムラ（京都）</h1>
+    <p class="lead">商店街のにぎわいの中で、すき焼きだけはゆっくり湯気を立てる。</p>
+
+    <section class="card">
+      <div class="mat">
+        <div style="font-size:14px; color:rgba(0,0,0,.7);">
+          写真はタップで拡大できます。
+        </div>
+      </div>
+
+      <div class="article clearfix">
+        <p>京都に来ると、なぜか「すき焼きが食べたい」と思ってしまう。豪華すぎるのは少し気後れするけれど、今日はちゃんと“京都のごちそう”を口にしたい。そんな中で、私はこの店を選んだ。</p>
+
+        <!-- 画像①：入口看板（左回り込み） -->
+        <figure class="insert left">
+          <a class="zoom" href="../images/kimura-01.jpg" data-caption="入口の看板。商店街の流れの中で、ここだけ時代がゆっくり。">
+            <img class="photo" src="../images/kimura-01.jpg" alt="名代キムラ 入口看板の写真">
+          </a>
+          <figcaption>入口の看板。商店街の流れの中で、ここだけ時代がゆっくり。</figcaption>
+        </figure>
+
+        <p>店は長い商店街の中にあって、いつも三十分ほど並ぶ。けれど不思議と苦にならない。通り過ぎる人の足音と、のれんの揺れを眺めていると、待ち時間は思いのほか早く過ぎていく。</p>
+
+        <p>玄関でベビーカーを預かってもらい、靴を脱いで、二階のお座敷へ。座敷はひらけていて、旅館のような空気がある。静かすぎず、にぎやかすぎず。子どもと一緒でも、必要以上に肩に力が入らないのが嬉しい。</p>
+
+        <!-- 画像②：外観（右回り込み） -->
+        <figure class="insert right">
+          <a class="zoom" href="../images/kimura-02.jpg" data-caption="のれんと看板。六つの『ム』が並ぶ印象。">
+            <img class="photo" src="../images/kimura-02.jpg" alt="名代キムラ 外観の写真">
+          </a>
+          <figcaption>のれんと看板。六つの「ム」が並ぶ印象。</figcaption>
+        </figure>
+
+        <p>玄関ではいつも、お店の人がやわらかく迎えてくれる。六つのカタカナの「ム」が並ぶ、あの印象的な印。暖簾をくぐって、少し軋むような階段を上がる。その一連が、もう“京都に来た”という実感をくれる。</p>
+
+        <p>すき焼きは、紙の説明を見ながら自分で仕立てるスタイル。けれど、鍋に肉を落とした瞬間、家とは別物になる。甘辛い割り下に、肉の脂が溶けて、湯気に匂いが立つ、台所では出せない味が京都の１日をさらに特別なものにしてくれる。</p>
+
+        <!-- 画像③：鍋（本文中にドン、でも小さめ） -->
+        <figure class="insert left">
+          <a class="zoom" href="../images/kimura-03.jpg" data-caption="湯気と割り下と肉の脂。">
+            <img class="photo" src="../images/kimura-03.jpg" alt="すき焼き鍋の写真">
+          </a>
+          <figcaption>湯気と割り下と肉の脂。</figcaption>
+        </figure>
+
+        <p>慣れていない人には、店員さんがそっと教えている。観光客の不器用さにも、きちんと優しい。肉の追加ができるのもありがたいし、ご飯に添えられる漬物まで嬉しい。</p>
+
+        <p>食べ終えて一階に降りると、玄関には、さっき脱いだ靴がもう用意されている。さっと履いて、また商店街の喧騒へ戻っていく。待たせない、迷わせない。その心配りが、この店の“歴史”なんだと思う。</p>
+
+        <p>また行きたいなぁ。</p>
+      </div>
+
+      <!-- 基本情報（ここはあなたが後で正確に埋められるよう、枠だけ用意） -->
+    <div class="info">
+  <h2>基本情報</h2>
+  <ul>
+    <li><strong>店名：</strong>　名代　キムラ</li>
+    <li><strong>住所：</strong>〒604-8043　京都府京都市中京区東大文字町300</li>
+    <li><strong>電話番号：</strong><a href="tel:+81752310002">075-231-0002</a></li>
+    <li><strong>営業時間：</strong>12:00〜21:00</li>
+    <li><strong>定休日：</strong>月曜日、第3火曜不定</li>
+    <li><strong>喫煙：</strong>全席禁煙（※訪問時の情報）</li>
+    <li><strong>座席：</strong>座敷あり、個室あり</li>
+    <li><strong>Googleマップ：</strong><a href="https://www.google.com/maps/search/?api=1&query=300+Higashidaimonjicho+Nakagyo+Kyoto+Japan" target="_blank" rel="noopener">地図を見る</a></li>
+  </ul>
+</div>
+    </section>
+
+    <!-- Lightbox -->
+    <dialog id="lightbox">
+      <div class="lb-wrap">
+        <button class="lb-close" id="lbClose" type="button">閉じる</button>
+        <img id="lbImg" alt="">
+        <div class="lb-cap" id="lbCap"></div>
+      </div>
+    </dialog>
+  </main>
+
+  <script>
+    // タップで拡大（同一ページ内）
+    const dlg = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lbImg');
+    const lbCap = document.getElementById('lbCap');
+    const closeBtn = document.getElementById('lbClose');
+
+    document.querySelectorAll('a.zoom').forEach(a => {
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        const href = a.getAttribute('href');
+        const cap = a.dataset.caption || '';
+        const imgEl = a.querySelector('img');
+        lbImg.src = href;
+        lbImg.alt = imgEl ? imgEl.alt : '';
+        lbCap.textContent = cap;
+        dlg.showModal();
+      });
+    });
+
+    closeBtn.addEventListener('click', () => dlg.close());
+    dlg.addEventListener('click', (e) => {
+      // 背景クリックで閉じる
+      const rect = dlg.getBoundingClientRect();
+      const inDialog =
+        rect.top <= e.clientY && e.clientY <= rect.top + rect.height &&
+        rect.left <= e.clientX && e.clientX <= rect.left + rect.width;
+      if (!inDialog) dlg.close();
+    });
+  </script>
+</body>
+</html>
