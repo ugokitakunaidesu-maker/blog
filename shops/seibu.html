@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>西武　西新宿店（東京・新宿）｜暮らしと喫茶の手帖</title>
+  <meta name="description" content="京都の商店街で、気負わずにすき焼き。名代キムラの入口、のれん、鍋の景色と、旅の記憶。">
+
+  <style>
+    :root{
+      --bg:#faf7ef;
+      --ink:#222;
+      --card:#fff;
+      --mat:#fff8ea;
+      --line:rgba(0,0,0,.10);
+      --shadow:0 10px 24px rgba(0,0,0,.08);
+      --radius:18px;
+      --radius2:14px;
+    }
+
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--ink);
+      font-family: system-ui, -apple-system, "Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+      line-height:1.95;
+    }
+
+    main{
+      max-width:860px;
+      margin:0 auto;
+      padding:18px 16px 56px;
+    }
+
+    /* 上の戻るリンク */
+    .back{
+      margin:10px 0 18px;
+      font-size:14px;
+    }
+    .back a{
+      color:var(--ink);
+      text-decoration:none;
+      border-bottom:1px solid rgba(0,0,0,.25);
+      padding-bottom:2px;
+    }
+
+    /* 見出し */
+    h1{
+      margin:10px 0 14px;
+      font-size:26px;
+      letter-spacing:.02em;
+    }
+    .lead{
+      margin:0 0 18px;
+      color:rgba(0,0,0,.75);
+      font-size:14px;
+    }
+
+    /* 記事カード */
+    .card{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .mat{
+      padding:18px;
+      background:linear-gradient(180deg, var(--mat), rgba(255,248,234,0));
+      border-bottom:1px solid var(--line);
+    }
+
+    /* 記事本文 */
+    .article{
+      padding:18px;
+    }
+    .article p{
+      margin:0 0 14px;
+      font-size:16px;
+    }
+
+    /* 雑誌っぽい “文章の中の差し込み写真” */
+    figure.insert{
+      margin:10px 0 16px;
+    }
+
+    /* 画像本体（小さめ＋角丸＋枠） */
+    .photo{
+      display:block;
+      width:100%;
+      max-width:360px;          /* ← 小さめの上限 */
+      border-radius:var(--radius2);
+      border:1px solid var(--line);
+      box-shadow:0 8px 18px rgba(0,0,0,.08);
+      background:#fff;
+    }
+
+    /* PCは左右に回り込み（雑誌っぽい） */
+    @media (min-width: 760px){
+      figure.insert.left  { float:left;  margin:6px 18px 10px 0; }
+      figure.insert.right { float:right; margin:6px 0 10px 18px; }
+      figure.insert .photo{ max-width:340px; }
+    }
+
+    /* キャプション */
+    figcaption{
+      margin-top:8px;
+      font-size:12px;
+      color:rgba(0,0,0,.62);
+    }
+
+    /* クリックできる感じ */
+    .zoom{
+      display:inline-block;
+      text-decoration:none;
+      color:inherit;
+      cursor:zoom-in;
+    }
+
+    /* float解除 */
+    .clearfix::after{
+      content:"";
+      display:block;
+      clear:both;
+    }
+
+    /* 基本情報（箇条書き） */
+    .info{
+      margin-top:14px;
+      padding:16px;
+      border-top:1px solid var(--line);
+      background:rgba(255,255,255,.55);
+    }
+    .info h2{
+      font-size:15px;
+      margin:0 0 10px;
+    }
+    .info ul{
+      margin:0;
+      padding-left:18px;
+      font-size:14px;
+    }
+    .info li{
+      margin:6px 0;
+    }
+    .info a{
+      color:var(--ink);
+      text-decoration:none;
+      border-bottom:1px solid rgba(0,0,0,.25);
+      padding-bottom:2px;
+      word-break:break-word;
+    }
+
+    /* ====== 拡大表示（dialog） ====== */
+    dialog#lightbox{
+      width:min(92vw, 900px);
+      border:none;
+      border-radius:16px;
+      padding:0;
+      box-shadow:0 20px 60px rgba(0,0,0,.35);
+      background:#111;
+      color:#fff;
+    }
+    dialog#lightbox::backdrop{
+      background:rgba(0,0,0,.55);
+    }
+    .lb-wrap{
+      position:relative;
+      padding:10px;
+    }
+    #lbImg{
+      width:100%;
+      height:auto;
+      display:block;
+      border-radius:12px;
+      background:#000;
+    }
+    .lb-close{
+      position:absolute;
+      top:10px;
+      right:10px;
+      border:none;
+      background:rgba(255,255,255,.14);
+      color:#fff;
+      padding:10px 12px;
+      border-radius:999px;
+      cursor:pointer;
+      font-size:14px;
+    }
+    .lb-cap{
+      padding:10px 12px 14px;
+      font-size:13px;
+      color:rgba(255,255,255,.85);
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <p class="back"><a href="../index.html">← トップへ戻る</a></p>
+
+    <h1>珈琲西武 西新宿店（東京・西新宿）</h1>
+<p class="lead">
+  朝の純喫茶で、今日が少し良い日になる。</p>
+
+    <section class="card">
+      <div class="mat">
+        <div style="font-size:14px; color:rgba(0,0,0,.7);">
+          写真はタップで拡大できます。
+        </div>
+      </div>
+
+      <div class="article clearfix">
+      <p>
+ふと疲れた時、近くに純喫茶 西武の西新宿店を見つけた。ちょうどオープン時間だったこともあり、「少しだけ休もう」と軽い気持ちで入ったのだが、扉を開けた瞬間、深紅のベルベットソファとステンドグラスが目に入り、本店で感じた空気を思い出した。
+<figure class="insert right">
+  <a class="zoom" href="../images/seibu-04.jpg" data-caption="新宿の朝に浮かぶ、純喫茶のネオン。">
+    <img class="photo" src="../images/seibu-04.jpg" alt="純喫茶 西武 西新宿店のネオン">
+  </a>
+  <figcaption>新宿の朝に浮かぶ、純喫茶のネオン。</figcaption>
+</figure>
+</p>
+
+<figure class="insert right">
+  <a class="zoom" href="../images/seibu-01.jpg" data-caption="表の食品サンプルに、もう心をつかまれる。">
+    <img class="photo" src="../images/seibu-01.jpg" alt="純喫茶 西武 西新宿店の食品サンプル">
+  </a>
+  <figcaption>表の食品サンプルに、もう心をつかまれる。</figcaption>
+</figure>
+
+<p>
+まだ朝の空気が残っている時間だったのに、気づけば店内はあっという間に人で埋まっていく。若い人から年配の方まで客層はさまざま。お昼前だったこともあり、周囲ではオムライスを注文している人が多かった。
+</p>
+
+<p>
+私は、ご飯メニューがしっかり充実している喫茶店が好きだ。
+</p>
+
+<p>
+ちゃんと食事をして、そのあとに甘味で締める。そんな時間には、妙に“暮らしが整う感じ”がある。
+</p>
+
+<figure class="insert left">
+  <a class="zoom" href="../images/seibu-02.jpg" data-caption="喫茶店で食べる、とろとろのオムライス。">
+    <img class="photo" src="../images/seibu-02.jpg" alt="純喫茶 西武 西新宿店のオムライス">
+  </a>
+  <figcaption>喫茶店で食べる、とろとろのオムライス。</figcaption>
+</figure>
+
+<p>
+運ばれてきたオムライスは、想像以上にとろとろだった。家で真似しようとしても、なかなか辿り着けない喫茶店の味。濃すぎないデミグラスと、やわらかな卵のバランスがちょうどいい。
+</p>
+
+<p>
+そして、子どもたちが表の食品サンプルから目を離せなくなっていたのが、プリン・ア・ラ・モードだった。
+</p>
+
+<figure class="insert right">
+  <a class="zoom" href="../images/seibu-03.jpg" data-caption="平たいお皿の上の、夢みたいなプリン・ア・ラ・モード。">
+    <img class="photo" src="../images/seibu-03.jpg" alt="純喫茶 西武 西新宿店のプリン・ア・ラ・モード">
+  </a>
+  <figcaption>夢みたいなプリン・ア・ラ・モード。</figcaption>
+</figure>
+
+<p>
+フルーツがたっぷり盛られ、その横ではアイスクリームがコーンごと大胆に倒れ込んでいる。平たいお皿の上に、こんなにも夢みたいなものが成立するのか、と少し驚いてしまう。
+</p>
+
+<p>
+実際に運ばれてきたそれも、期待を裏切らなかった。フルーツの瑞々しさと、あっさりしたアイス。そして純喫茶らしい、少し甘めのクリーム。その全部がどこか懐かしく、けれどちゃんと贅沢だった。
+</p>
+
+<figure class="insert left">
+  <a class="zoom" href="../images/seibu-05.jpg" data-caption="木のテーブルに残る、喫茶店の記憶。">
+    <img class="photo" src="../images/seibu-05.jpg" alt="純喫茶 西武 西新宿店のコースター">
+  </a>
+  <figcaption>木のテーブルに残る、喫茶店の記憶。</figcaption>
+</figure>
+
+<p>
+朝一番だったおかげで、入店は驚くほどすんなりだった。でも帰る頃には、エレベーター前に行列ができている。
+</p>
+
+<p>
+朝のうちに、こんな純喫茶でゆっくり腹ごしらえができる日というのは、それだけで「今日は良い日になる気がする」と思わせてくれる。
+</p>
+      </div>
+
+      <!-- 基本情報（ここはあなたが後で正確に埋められるよう、枠だけ用意） -->
+      
+     <div class="info">
+  <h2>基本情報</h2>
+  <ul>
+
+    <li><strong>店名：</strong>珈琲西武 西新宿店</li>
+
+    <li><strong>住所：</strong>
+      〒160-0023 東京都新宿区西新宿7-9-16 西新宿メトロビル2F
+    </li>
+
+    <li><strong>電話番号：</strong>
+      <a href="tel:+81333612828">03-3361-2828</a>
+    </li>
+
+    <li><strong>営業時間：</strong>
+      11:00〜22:30（日曜・祝日は22:00まで）
+    </li>
+
+    <li><strong>定休日：</strong>
+      不定休
+    </li>
+
+    <li><strong>アクセス：</strong>
+      都営大江戸線「新宿西口駅」徒歩約3分／JR「新宿駅」徒歩約8分
+    </li>
+
+    <li><strong>喫煙：</strong>
+      喫煙専用室あり
+    </li>
+
+    <li><strong>Googleマップ：</strong>
+      <a href="https://www.google.com/maps/search/?api=1&query=珈琲西武西新宿店" target="_blank">
+        地図を見る
+      </a>
+    </li>
+
+    <li><strong>公式Instagram：</strong>
+      <a href="https://www.instagram.com/coffeeseibu_nishi/" target="_blank">
+        ここから開く
+      </a>
+    </li>
+
+  </ul>
+
+  <p class="note">
+    ※営業時間・定休日などは変更される場合があります。訪問前に公式情報をご確認ください。
+  </p>
+</div>
+
+    </section>
+
+    <!-- Lightbox -->
+    <dialog id="lightbox">
+      <div class="lb-wrap">
+        <button class="lb-close" id="lbClose" type="button">閉じる</button>
+        <img id="lbImg" alt="">
+        <div class="lb-cap" id="lbCap"></div>
+      </div>
+    </dialog>
+  </main>
+
+  <script>
+    // タップで拡大（同一ページ内）
+    const dlg = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lbImg');
+    const lbCap = document.getElementById('lbCap');
+    const closeBtn = document.getElementById('lbClose');
+
+    document.querySelectorAll('a.zoom').forEach(a => {
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        const href = a.getAttribute('href');
+        const cap = a.dataset.caption || '';
+        const imgEl = a.querySelector('img');
+        lbImg.src = href;
+        lbImg.alt = imgEl ? imgEl.alt : '';
+        lbCap.textContent = cap;
+        dlg.showModal();
+      });
+    });
+
+    closeBtn.addEventListener('click', () => dlg.close());
+    dlg.addEventListener('click', (e) => {
+      // 背景クリックで閉じる
+      const rect = dlg.getBoundingClientRect();
+      const inDialog =
+        rect.top <= e.clientY && e.clientY <= rect.top + rect.height &&
+        rect.left <= e.clientX && e.clientX <= rect.left + rect.width;
+      if (!inDialog) dlg.close();
+    });
+  </script>
+</body>
+</html>
