@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>梅園（京都・清水）｜暮らしと喫茶の手帖</title>
+  <meta name="description" content="京都の商店街で、気負わずにすき焼き。名代キムラの入口、のれん、鍋の景色と、旅の記憶。">
+
+  <style>
+    :root{
+      --bg:#faf7ef;
+      --ink:#222;
+      --card:#fff;
+      --mat:#fff8ea;
+      --line:rgba(0,0,0,.10);
+      --shadow:0 10px 24px rgba(0,0,0,.08);
+      --radius:18px;
+      --radius2:14px;
+    }
+
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--ink);
+      font-family: system-ui, -apple-system, "Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+      line-height:1.95;
+    }
+
+    main{
+      max-width:860px;
+      margin:0 auto;
+      padding:18px 16px 56px;
+    }
+
+    /* 上の戻るリンク */
+    .back{
+      margin:10px 0 18px;
+      font-size:14px;
+    }
+    .back a{
+      color:var(--ink);
+      text-decoration:none;
+      border-bottom:1px solid rgba(0,0,0,.25);
+      padding-bottom:2px;
+    }
+
+    /* 見出し */
+    h1{
+      margin:10px 0 14px;
+      font-size:26px;
+      letter-spacing:.02em;
+    }
+    .lead{
+      margin:0 0 18px;
+      color:rgba(0,0,0,.75);
+      font-size:14px;
+    }
+
+    /* 記事カード */
+    .card{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .mat{
+      padding:18px;
+      background:linear-gradient(180deg, var(--mat), rgba(255,248,234,0));
+      border-bottom:1px solid var(--line);
+    }
+
+    /* 記事本文 */
+    .article{
+      padding:18px;
+    }
+    .article p{
+      margin:0 0 14px;
+      font-size:16px;
+    }
+
+    /* 雑誌っぽい “文章の中の差し込み写真” */
+    figure.insert{
+      margin:10px 0 16px;
+    }
+
+    /* 画像本体（小さめ＋角丸＋枠） */
+    .photo{
+      display:block;
+      width:100%;
+      max-width:360px;          /* ← 小さめの上限 */
+      border-radius:var(--radius2);
+      border:1px solid var(--line);
+      box-shadow:0 8px 18px rgba(0,0,0,.08);
+      background:#fff;
+    }
+
+    /* PCは左右に回り込み（雑誌っぽい） */
+    @media (min-width: 760px){
+      figure.insert.left  { float:left;  margin:6px 18px 10px 0; }
+      figure.insert.right { float:right; margin:6px 0 10px 18px; }
+      figure.insert .photo{ max-width:340px; }
+    }
+
+    /* キャプション */
+    figcaption{
+      margin-top:8px;
+      font-size:12px;
+      color:rgba(0,0,0,.62);
+    }
+
+    /* クリックできる感じ */
+    .zoom{
+      display:inline-block;
+      text-decoration:none;
+      color:inherit;
+      cursor:zoom-in;
+    }
+
+    /* float解除 */
+    .clearfix::after{
+      content:"";
+      display:block;
+      clear:both;
+    }
+
+    /* 基本情報（箇条書き） */
+    .info{
+      margin-top:14px;
+      padding:16px;
+      border-top:1px solid var(--line);
+      background:rgba(255,255,255,.55);
+    }
+    .info h2{
+      font-size:15px;
+      margin:0 0 10px;
+    }
+    .info ul{
+      margin:0;
+      padding-left:18px;
+      font-size:14px;
+    }
+    .info li{
+      margin:6px 0;
+    }
+    .info a{
+      color:var(--ink);
+      text-decoration:none;
+      border-bottom:1px solid rgba(0,0,0,.25);
+      padding-bottom:2px;
+      word-break:break-word;
+    }
+
+    /* ====== 拡大表示（dialog） ====== */
+    dialog#lightbox{
+      width:min(92vw, 900px);
+      border:none;
+      border-radius:16px;
+      padding:0;
+      box-shadow:0 20px 60px rgba(0,0,0,.35);
+      background:#111;
+      color:#fff;
+    }
+    dialog#lightbox::backdrop{
+      background:rgba(0,0,0,.55);
+    }
+    .lb-wrap{
+      position:relative;
+      padding:10px;
+    }
+    #lbImg{
+      width:100%;
+      height:auto;
+      display:block;
+      border-radius:12px;
+      background:#000;
+    }
+    .lb-close{
+      position:absolute;
+      top:10px;
+      right:10px;
+      border:none;
+      background:rgba(255,255,255,.14);
+      color:#fff;
+      padding:10px 12px;
+      border-radius:999px;
+      cursor:pointer;
+      font-size:14px;
+    }
+    .lb-cap{
+      padding:10px 12px 14px;
+      font-size:13px;
+      color:rgba(255,255,255,.85);
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <p class="back"><a href="../index.html">← トップへ戻る</a></p>
+
+    <h1>梅園 清水店（京都・清水）</h1>
+<p class="lead">
+  夏の京都で、冷たい甘味に救われる。
+</p>
+
+    <section class="card">
+      <div class="mat">
+        <div style="font-size:14px; color:rgba(0,0,0,.7);">
+          写真はタップで拡大できます。
+        </div>
+      </div>
+
+      <div class="article clearfix">
+        <p>
+京都の観光は、夏場になるとやはり厳しい。分かってはいるのだけれど、冷たい甘味に舌鼓を打ちながら、言葉の通り“命を救ってもらう”ようなありがたさを感じられるのも、また夏の京都の良さなのかもしれない。
+</p>
+
+<figure class="insert right">
+  <a class="zoom" href="../images/umezono-01.jpg" data-caption="甘い、しょっぱいを繰り返したくなる。">
+    <img class="photo" src="../images/umezono-01.jpg" alt="梅園 清水店のあんみつとみたらし団子">
+  </a>
+  <figcaption>甘い、しょっぱいを繰り返したくなる。</figcaption>
+</figure>
+
+<p>
+修学旅行生とインバウンドで大盛況の清水。店先に並ぶのぼりも、日本語より外国語のほうが多いのではと思うほどで、その賑わいに圧倒される。それでも、昔から変わらずそこにあり続ける店の前を通ると、ふと足が止まるのだ。
+</p>
+
+<p>
+写真撮影についての注意書きも見かける。観光地でありながら、ここはちゃんと“誰かの生活の上”にある場所なのだと思い出させてくれる。京都の人たちの日常の上に、観光客のほんの一瞬の時間をお邪魔させてもらっている。ルールを守りながら、その土地に積み重なってきた時間の重みを受け取りたいと思う。
+</p>
+
+<p>
+そんな観光の途中で、幾度となく食べたくなるのが甘味だ。
+</p>
+
+<p>
+ただ、甘い、しょっぱい、を繰り返したい私にとって、みたらし団子は不思議な食べ物である。甘味を食べているはずなのに、さらに甘味を食べたくさせてくれる。
+</p>
+
+<p>
+梅園のみたらし団子は、なんと言ってもその焼き目の香ばしさが印象的だ。しっかりしたお団子の歯ごたえに、甘すぎないみたらし。思わず「おいしい」と何度も口にしてしまう。
+</p>
+
+<figure class="insert left">
+  <a class="zoom" href="../images/umezono-02.jpg" data-caption="夏の京都にありがたい、桃のかき氷。">
+    <img class="photo" src="../images/umezono-02.jpg" alt="梅園 清水店の桃のかき氷">
+  </a>
+  <figcaption>夏の京都にありがたい、桃のかき氷。</figcaption>
+</figure>
+
+<p>
+期間限定の桃のかき氷もまた、夏の京都にぴったりだった。果肉そのものの甘みはもちろん、白い氷の山のどこを食べてもちゃんと桃の味がするくらい、シロップがたっぷりとかかっている。最後まで薄まった感じがなく、食べ進めるたびに嬉しくなるかき氷だった。
+</p>
+
+<p>
+栗白玉あんみつは、栗の特別感と、もちもちした白玉の満足感がしっかりあるのに、重たすぎない。歩き疲れた体に、甘さがじんわり染み込んでいく。
+</p>
+
+<p>
+暑さに疲れ、人の多さに少し圧倒されながらも、「また京都に来たいな」と思ってしまう。その理由のひとつに、こういう甘味の存在がある気がする。
+</p>
+      </div>
+
+      <!-- 基本情報（ここはあなたが後で正確に埋められるよう、枠だけ用意） -->
+      
+      <div class="info">
+  <h2>基本情報</h2>
+  <ul>
+
+    <li><strong>店名：</strong>甘党茶屋 梅園 清水店</li>
+
+    <li><strong>住所：</strong>
+      京都府京都市東山区清水3丁目339-1
+    </li>
+
+    <li><strong>営業時間：</strong>
+      11:00〜18:30（L.O.18:00）
+    </li>
+
+    <li><strong>定休日：</strong>
+      不定休
+    </li>
+
+    <li><strong>アクセス：</strong>
+      清水寺周辺／京阪「祇園四条駅」から徒歩約15分
+    </li>
+
+    <li><strong>喫煙：</strong>
+      店内禁煙
+    </li>
+
+    <li><strong>Googleマップ：</strong>
+      <a href="https://www.google.com/maps/search/?api=1&query=梅園清水店" target="_blank">
+        地図を見る
+      </a>
+    </li>
+
+    <li><strong>公式サイト：</strong>
+      <a href="https://umezono-kyoto.com/" target="_blank">
+        ここから開く
+      </a>
+    </li>
+
+  </ul>
+
+  <p class="note">
+    ※営業時間・定休日などは変更される場合があります。訪問前に公式情報をご確認ください。
+  </p>
+</div>
+  </a>
+</li> 
+
+  </ul>
+
+  <p class="note">
+    ※営業時間・定休日などは変更される場合があります。訪問前に公式情報をご確認ください。
+  </p>
+</div>
+
+    </section>
+
+    <!-- Lightbox -->
+    <dialog id="lightbox">
+      <div class="lb-wrap">
+        <button class="lb-close" id="lbClose" type="button">閉じる</button>
+        <img id="lbImg" alt="">
+        <div class="lb-cap" id="lbCap"></div>
+      </div>
+    </dialog>
+  </main>
+
+  <script>
+    // タップで拡大（同一ページ内）
+    const dlg = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lbImg');
+    const lbCap = document.getElementById('lbCap');
+    const closeBtn = document.getElementById('lbClose');
+
+    document.querySelectorAll('a.zoom').forEach(a => {
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        const href = a.getAttribute('href');
+        const cap = a.dataset.caption || '';
+        const imgEl = a.querySelector('img');
+        lbImg.src = href;
+        lbImg.alt = imgEl ? imgEl.alt : '';
+        lbCap.textContent = cap;
+        dlg.showModal();
+      });
+    });
+
+    closeBtn.addEventListener('click', () => dlg.close());
+    dlg.addEventListener('click', (e) => {
+      // 背景クリックで閉じる
+      const rect = dlg.getBoundingClientRect();
+      const inDialog =
+        rect.top <= e.clientY && e.clientY <= rect.top + rect.height &&
+        rect.left <= e.clientX && e.clientX <= rect.left + rect.width;
+      if (!inDialog) dlg.close();
+    });
+  </script>
+</body>
+</html>
