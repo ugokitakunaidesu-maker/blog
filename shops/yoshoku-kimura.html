@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>洋食キムラ（新横浜）｜暮らしと喫茶の手帖</title>
+  <meta name="description" content="京都の商店街で、気負わずにすき焼き。名代キムラの入口、のれん、鍋の景色と、旅の記憶。">
+
+  <style>
+    :root{
+      --bg:#faf7ef;
+      --ink:#222;
+      --card:#fff;
+      --mat:#fff8ea;
+      --line:rgba(0,0,0,.10);
+      --shadow:0 10px 24px rgba(0,0,0,.08);
+      --radius:18px;
+      --radius2:14px;
+    }
+
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--ink);
+      font-family: system-ui, -apple-system, "Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+      line-height:1.95;
+    }
+
+    main{
+      max-width:860px;
+      margin:0 auto;
+      padding:18px 16px 56px;
+    }
+
+    /* 上の戻るリンク */
+    .back{
+      margin:10px 0 18px;
+      font-size:14px;
+    }
+    .back a{
+      color:var(--ink);
+      text-decoration:none;
+      border-bottom:1px solid rgba(0,0,0,.25);
+      padding-bottom:2px;
+    }
+
+    /* 見出し */
+    h1{
+      margin:10px 0 14px;
+      font-size:26px;
+      letter-spacing:.02em;
+    }
+    .lead{
+      margin:0 0 18px;
+      color:rgba(0,0,0,.75);
+      font-size:14px;
+    }
+
+    /* 記事カード */
+    .card{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .mat{
+      padding:18px;
+      background:linear-gradient(180deg, var(--mat), rgba(255,248,234,0));
+      border-bottom:1px solid var(--line);
+    }
+
+    /* 記事本文 */
+    .article{
+      padding:18px;
+    }
+    .article p{
+      margin:0 0 14px;
+      font-size:16px;
+    }
+
+    /* 雑誌っぽい “文章の中の差し込み写真” */
+    figure.insert{
+      margin:10px 0 16px;
+    }
+
+    /* 画像本体（小さめ＋角丸＋枠） */
+    .photo{
+      display:block;
+      width:100%;
+      max-width:360px;          /* ← 小さめの上限 */
+      border-radius:var(--radius2);
+      border:1px solid var(--line);
+      box-shadow:0 8px 18px rgba(0,0,0,.08);
+      background:#fff;
+    }
+
+    /* PCは左右に回り込み（雑誌っぽい） */
+    @media (min-width: 760px){
+      figure.insert.left  { float:left;  margin:6px 18px 10px 0; }
+      figure.insert.right { float:right; margin:6px 0 10px 18px; }
+      figure.insert .photo{ max-width:340px; }
+    }
+
+    /* キャプション */
+    figcaption{
+      margin-top:8px;
+      font-size:12px;
+      color:rgba(0,0,0,.62);
+    }
+
+    /* クリックできる感じ */
+    .zoom{
+      display:inline-block;
+      text-decoration:none;
+      color:inherit;
+      cursor:zoom-in;
+    }
+
+    /* float解除 */
+    .clearfix::after{
+      content:"";
+      display:block;
+      clear:both;
+    }
+
+    /* 基本情報（箇条書き） */
+    .info{
+      margin-top:14px;
+      padding:16px;
+      border-top:1px solid var(--line);
+      background:rgba(255,255,255,.55);
+    }
+    .info h2{
+      font-size:15px;
+      margin:0 0 10px;
+    }
+    .info ul{
+      margin:0;
+      padding-left:18px;
+      font-size:14px;
+    }
+    .info li{
+      margin:6px 0;
+    }
+    .info a{
+      color:var(--ink);
+      text-decoration:none;
+      border-bottom:1px solid rgba(0,0,0,.25);
+      padding-bottom:2px;
+      word-break:break-word;
+    }
+
+    /* ====== 拡大表示（dialog） ====== */
+    dialog#lightbox{
+      width:min(92vw, 900px);
+      border:none;
+      border-radius:16px;
+      padding:0;
+      box-shadow:0 20px 60px rgba(0,0,0,.35);
+      background:#111;
+      color:#fff;
+    }
+    dialog#lightbox::backdrop{
+      background:rgba(0,0,0,.55);
+    }
+    .lb-wrap{
+      position:relative;
+      padding:10px;
+    }
+    #lbImg{
+      width:100%;
+      height:auto;
+      display:block;
+      border-radius:12px;
+      background:#000;
+    }
+    .lb-close{
+      position:absolute;
+      top:10px;
+      right:10px;
+      border:none;
+      background:rgba(255,255,255,.14);
+      color:#fff;
+      padding:10px 12px;
+      border-radius:999px;
+      cursor:pointer;
+      font-size:14px;
+    }
+    .lb-cap{
+      padding:10px 12px 14px;
+      font-size:13px;
+      color:rgba(255,255,255,.85);
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <p class="back"><a href="../index.html">← トップへ戻る</a></p>
+
+    <h1>洋食キムラ（新横浜）</h1>
+<p class="lead">
+  熱々の洋食に、特別な気分をもらう。
+</p>
+
+    <section class="card">
+      <div class="mat">
+        <div style="font-size:14px; color:rgba(0,0,0,.7);">
+          写真はタップで拡大できます。
+        </div>
+      </div>
+
+      <div class="article clearfix">
+      <p><p>
+野毛の本店も魅力的だけれど、子ども連れなら新横浜駅のキムラもありがたい選択肢だと思う。
+</p>
+
+<figure class="insert right">
+  <a class="zoom" href="../images/yoshoku-kimura-01.jpg" data-caption="貝殻の鉄板にのった、熱々のハンバーグ。">
+    <img class="photo" src="../images/yoshoku-kimura-01.jpg" alt="洋食キムラのハンバーグ">
+  </a>
+  <figcaption>貝殻の鉄板にのった、熱々のハンバーグ。</figcaption>
+</figure>
+
+<p>
+運ばれてきたハンバーグは、貝殻の形をした鉄板の上でじゅうじゅうと音を立てていた。あふれんばかりのデミグラスソースに包まれた姿は、それだけでごちそうだ。器の形ひとつでここまで気分が変わるものなのかと思うけれど、あの愛らしい貝殻の鉄板を見ると、やはり少し胸が躍る。
+</p>
+
+<p>
+ハンバーグを割ると、肉の旨みと一緒に玉ねぎの甘みが広がる。濃厚なソースの中にほんのりとした酸味も感じられて、最後まで重たくなりすぎない。昔ながらの洋食なのに、不思議とまた食べたくなる味だった。
+</p>
+
+<figure class="insert left">
+  <a class="zoom" href="../images/yoshoku-kimura-02.jpg" data-caption="ハンバーグとグラタンを並べると、もう立派なごちそう。">
+    <img class="photo" src="../images/yoshoku-kimura-02.jpg" alt="洋食キムラのハンバーグとグラタン">
+  </a>
+  <figcaption>ハンバーグとグラタンを並べると、もう立派なごちそう。</figcaption>
+</figure>
+
+<p>
+一緒に頼んだグラタンも印象に残っている。太めのマカロニに、とろりとしたホワイトソース。グラタンというとソースを味わう料理のように思うけれど、こちらは具材もごろごろと入っていて、一匙ごとにうれしくなる。
+</p>
+
+<figure class="insert right">
+  <a class="zoom" href="../images/yoshoku-kimura-03.jpg" data-caption="太めのマカロニに、たっぷりのホワイトソース。">
+    <img class="photo" src="../images/yoshoku-kimura-03.jpg" alt="洋食キムラのグラタン">
+  </a>
+  <figcaption>太めのマカロニに、たっぷりのホワイトソース。</figcaption>
+</figure>
+
+<p>
+熱々のホワイトソースだけでも十分幸せなのに、具材の存在感がしっかりある。どこをすくっても何かが出てくるような、多幸感のあるグラタンだった。
+</p>
+
+<p>
+洋食キムラは1938年創業。横浜で長く愛されてきた理由は、料理のおいしさだけではなく、「今日は少し特別なご飯にしよう」と思わせてくれる空気にもあるのだと思う。
+</p>
+
+</p>
+      
+      
+      </div>
+
+      <!-- 基本情報（ここはあなたが後で正確に埋められるよう、枠だけ用意） -->
+      <div class="info">
+  <h2>基本情報</h2>
+  <ul>
+
+    <li><strong>店名：</strong>洋食キムラ キュービックプラザ新横浜店</li>
+
+    <li><strong>住所：</strong>
+      神奈川県横浜市港北区新横浜2-100-45 キュービックプラザ新横浜 9F
+    </li>
+
+    <li><strong>電話番号：</strong>
+      <a href="tel:+81454706272">045-470-6272</a>
+    </li>
+
+    <li><strong>営業時間：</strong>
+      平日 11:00〜16:00（L.O.15:00）／17:00〜22:00（L.O.21:00）<br>
+      土日祝 11:00〜22:00（L.O.21:00）
+    </li>
+
+    <li><strong>定休日：</strong>
+      キュービックプラザ新横浜に準ずる
+    </li>
+
+    <li><strong>アクセス：</strong>
+      JR・市営地下鉄「新横浜駅」直結
+    </li>
+
+    <li><strong>喫煙：</strong>
+      禁煙
+    </li>
+
+    <li><strong>Googleマップ：</strong>
+      <a href="https://www.google.com/maps/search/?api=1&query=洋食キムラ+キュービックプラザ新横浜店" target="_blank">
+        地図を見る
+      </a>
+    </li>
+
+    <li><strong>公式サイト：</strong>
+      <a href="https://yo-kimura.com/" target="_blank">
+        ここから開く
+      </a>
+    </li>
+
+  </ul>
+
+  <p class="note">
+    ※営業時間・定休日などは変更される場合があります。訪問前に公式情報をご確認ください。
+  </p>
+</div>
+
+  
+    </section>
+
+    <!-- Lightbox -->
+    <dialog id="lightbox">
+      <div class="lb-wrap">
+        <button class="lb-close" id="lbClose" type="button">閉じる</button>
+        <img id="lbImg" alt="">
+        <div class="lb-cap" id="lbCap"></div>
+      </div>
+    </dialog>
+  </main>
+
+  <script>
+    // タップで拡大（同一ページ内）
+    const dlg = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lbImg');
+    const lbCap = document.getElementById('lbCap');
+    const closeBtn = document.getElementById('lbClose');
+
+    document.querySelectorAll('a.zoom').forEach(a => {
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        const href = a.getAttribute('href');
+        const cap = a.dataset.caption || '';
+        const imgEl = a.querySelector('img');
+        lbImg.src = href;
+        lbImg.alt = imgEl ? imgEl.alt : '';
+        lbCap.textContent = cap;
+        dlg.showModal();
+      });
+    });
+
+    closeBtn.addEventListener('click', () => dlg.close());
+    dlg.addEventListener('click', (e) => {
+      // 背景クリックで閉じる
+      const rect = dlg.getBoundingClientRect();
+      const inDialog =
+        rect.top <= e.clientY && e.clientY <= rect.top + rect.height &&
+        rect.left <= e.clientX && e.clientX <= rect.left + rect.width;
+      if (!inDialog) dlg.close();
+    });
+  </script>
+</body>
+</html>
