@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>レストラン菊水｜暮らしと喫茶の手帖</title>
+  <meta name="description" content="京都の商店街で、気負わずにすき焼き。名代キムラの入口、のれん、鍋の景色と、旅の記憶。">
+
+  <style>
+    :root{
+      --bg:#faf7ef;
+      --ink:#222;
+      --card:#fff;
+      --mat:#fff8ea;
+      --line:rgba(0,0,0,.10);
+      --shadow:0 10px 24px rgba(0,0,0,.08);
+      --radius:18px;
+      --radius2:14px;
+    }
+
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--ink);
+      font-family: system-ui, -apple-system, "Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+      line-height:1.95;
+    }
+
+    main{
+      max-width:860px;
+      margin:0 auto;
+      padding:18px 16px 56px;
+    }
+
+    /* 上の戻るリンク */
+    .back{
+      margin:10px 0 18px;
+      font-size:14px;
+    }
+    .back a{
+      color:var(--ink);
+      text-decoration:none;
+      border-bottom:1px solid rgba(0,0,0,.25);
+      padding-bottom:2px;
+    }
+
+    /* 見出し */
+    h1{
+      margin:10px 0 14px;
+      font-size:26px;
+      letter-spacing:.02em;
+    }
+    .lead{
+      margin:0 0 18px;
+      color:rgba(0,0,0,.75);
+      font-size:14px;
+    }
+
+    /* 記事カード */
+    .card{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .mat{
+      padding:18px;
+      background:linear-gradient(180deg, var(--mat), rgba(255,248,234,0));
+      border-bottom:1px solid var(--line);
+    }
+
+    /* 記事本文 */
+    .article{
+      padding:18px;
+    }
+    .article p{
+      margin:0 0 14px;
+      font-size:16px;
+    }
+    .photo-grid{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap:10px;
+  margin:14px 0 18px;
+}
+
+.photo-grid img{
+  width:100%;
+  aspect-ratio:4/5;
+  object-fit:cover;
+  display:block;
+  border-radius:var(--radius2);
+  border:1px solid var(--line);
+  box-shadow:0 8px 18px rgba(0,0,0,.08);
+  background:#fff;
+}
+
+@media (max-width: 600px){
+  .photo-grid{
+    grid-template-columns: repeat(3, 1fr);
+    gap:6px;
+  }
+}
+
+    /* 雑誌っぽい “文章の中の差し込み写真” */
+    figure.insert{
+      margin:10px 0 16px;
+    }
+
+    /* 画像本体（小さめ＋角丸＋枠） */
+    .photo{
+      display:block;
+      width:100%;
+      max-width:360px;          /* ← 小さめの上限 */
+      border-radius:var(--radius2);
+      border:1px solid var(--line);
+      box-shadow:0 8px 18px rgba(0,0,0,.08);
+      background:#fff;
+    }
+
+    /* PCは左右に回り込み（雑誌っぽい） */
+    @media (min-width: 760px){
+      figure.insert.left  { float:left;  margin:6px 18px 10px 0; }
+      figure.insert.right { float:right; margin:6px 0 10px 18px; }
+      figure.insert .photo{ max-width:340px; }
+    }
+
+    /* キャプション */
+    figcaption{
+      margin-top:8px;
+      font-size:12px;
+      color:rgba(0,0,0,.62);
+    }
+
+    /* クリックできる感じ */
+    .zoom{
+      display:inline-block;
+      text-decoration:none;
+      color:inherit;
+      cursor:zoom-in;
+    }
+
+    /* float解除 */
+    .clearfix::after{
+      content:"";
+      display:block;
+      clear:both;
+    }
+
+    /* 基本情報（箇条書き） */
+    .info{
+      margin-top:14px;
+      padding:16px;
+      border-top:1px solid var(--line);
+      background:rgba(255,255,255,.55);
+    }
+    .info h2{
+      font-size:15px;
+      margin:0 0 10px;
+    }
+    .info ul{
+      margin:0;
+      padding-left:18px;
+      font-size:14px;
+    }
+    .info li{
+      margin:6px 0;
+    }
+    .info a{
+      color:var(--ink);
+      text-decoration:none;
+      border-bottom:1px solid rgba(0,0,0,.25);
+      padding-bottom:2px;
+      word-break:break-word;
+    }
+
+    /* ====== 拡大表示（dialog） ====== */
+    dialog#lightbox{
+      width:min(92vw, 900px);
+      border:none;
+      border-radius:16px;
+      padding:0;
+      box-shadow:0 20px 60px rgba(0,0,0,.35);
+      background:#111;
+      color:#fff;
+    }
+    dialog#lightbox::backdrop{
+      background:rgba(0,0,0,.55);
+    }
+    .lb-wrap{
+      position:relative;
+      padding:10px;
+    }
+    #lbImg{
+      width:100%;
+      height:auto;
+      display:block;
+      border-radius:12px;
+      background:#000;
+    }
+    .lb-close{
+      position:absolute;
+      top:10px;
+      right:10px;
+      border:none;
+      background:rgba(255,255,255,.14);
+      color:#fff;
+      padding:10px 12px;
+      border-radius:999px;
+      cursor:pointer;
+      font-size:14px;
+    }
+    .lb-cap{
+      padding:10px 12px 14px;
+      font-size:13px;
+      color:rgba(255,255,255,.85);
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <p class="back"><a href="../index.html">← トップへ戻る</a></p>
+
+    <h1>レストラン菊水（京都）｜</title></h1>
+    <p class="lead">
+  歌舞伎座の向かいで百年以上。京都の街角に残る、老舗洋食店。
+</p>
+
+    <section class="card">
+      <div class="mat">
+        <div style="font-size:14px; color:rgba(0,0,0,.7);">
+          写真はタップで拡大できます。
+        </div>
+      </div>
+
+      <div class="article clearfix">
+      <p>
+  歌舞伎座の向かい。少し曇ったガラスの向こうで、白い制服のスタッフが静かに動いている。横断歩道を渡るたびに気になっていた店だ。映画で見た古い洋館のようでもあり、どこか別世界のようにも見える。
+</p>
+
+<div class="photo-grid">
+  <img src="../images/kikusui-1.jpg" alt="レストラン菊水の外観">
+  <img src="../images/kikusui-2.jpg" alt="レストラン菊水の食品サンプル">
+  <img src="../images/kikusui-3.jpg" alt="レストラン菊水の店内">
+</div>
+
+<p>
+  レストラン菊水は大正五年創業の老舗洋食店。店先の食品サンプルに何度も足を止めながらも、子連れでは難しそうだと勝手に思い込んでいた。
+</p>
+
+<p>
+  ところが旅行最終日、お子様ランチがあることを知る。これは行くしかない。
+</p>
+
+<p>
+  実際に入ってみると、客層はやはり落ち着いていた。歌舞伎帰りなのか着物姿の人も多い。ただ、子ども用のカトラリーを用意してもらえたり、ベビーカーを預かっていただけたりと、子連れだからと肩身の狭い思いをすることはなかった。
+</p>
+
+<p>
+  ただ、ファミリーレストランのような感覚で訪れると少し戸惑うかもしれない。店内には落ち着いた時間が流れていて、周囲への配慮やマナーを大切にしたい空気がある。子連れでも利用できるが、その空気を一緒に楽しめる年齢になってからの方が、より心地よく過ごせそうだと感じた。
+</p>
+
+<div class="photo-grid">
+  <img src="../images/kikusui-4.jpg" alt="レストラン菊水の卓上風景">
+  <img src="../images/kikusui-5.jpg" alt="レストラン菊水のスープ">
+  <img src="../images/kikusui-6.jpg" alt="レストラン菊水の食品サンプル">
+</div>
+
+<p>
+  外から見ても印象的だったが、中に入るとその存在感はさらに増す。長い年月をかけて積み重ねられた空気は、一朝一夕には作れないものだろう。
+</p>
+
+<p>
+  名物はビーフシチューやハヤシライスらしい。周囲を見渡すとランチセットを注文している人も多く、私も迷った末にヒレステーキとエビフライのセットを選んだ。
+</p>
+
+<div class="photo-grid">
+  <img src="../images/kikusui-7.jpg" alt="エビフライ">
+  <img src="../images/kikusui-8.jpg" alt="ヒレステーキとエビフライ">
+  <img src="../images/kikusui-9.jpg" alt="お子様ランチ">
+</div>
+
+<p>
+  けれど、料理については私の好みとは少し違っていた。エビフライは私が普段好んで食べる、しっかりとした身の食感とは異なり、ヒレステーキも期待していた柔らかさではなかった。
+</p>
+
+<p>
+  一方で、子どもたちはお子様ランチを嬉しそうに頬張っていた。同じテーブルでも感想はそれぞれらしい。
+</p>
+
+
+<p>
+  味の感じ方は人によって違うものだと思う。それでも、大正から続く店の空気や、窓の向こうに見えた景色は、この場所でしか味わえないものだった。長く愛されてきた理由を考えながら、店をあとにした。
+</p>
+      
+      
+      </div>
+      
+
+      <!-- 基本情報（ここはあなたが後で正確に埋められるよう、枠だけ用意） -->
+      
+      <div class="shop-info">
+  <h2>基本情報</h2>
+  <ul>
+    <li>店名：レストラン菊水</li>
+    <li>住所：京都府京都市東山区四条大橋東詰</li>
+    <li>電話：075-561-1001</li>
+    <li>営業時間：11:00～21:00（変更の可能性あり）</li>
+    <li>定休日：水曜日（変更の可能性あり）</li>
+    <li>喫煙：不明</li>
+    <li>禁煙席：あり</li>
+    <li>ベビーカー：店内持ち込みは難しく、訪問時は預かっていただいた</li>
+    <li>訪問日時：2026年6月</li>
+    <li><a href="https://maps.google.com/?q=レストラン菊水 京都" target="_blank">Googleマップ</a></li>
+    <li><a href="https://restaurant-kikusui.com/" target="_blank">公式サイト</a></li>
+  </ul>
+</div>
+
+  
+    </section>
+
+    <!-- Lightbox -->
+    <dialog id="lightbox">
+      <div class="lb-wrap">
+        <button class="lb-close" id="lbClose" type="button">閉じる</button>
+        <img id="lbImg" alt="">
+        <div class="lb-cap" id="lbCap"></div>
+      </div>
+    </dialog>
+  </main>
+
+  <script>
+    // タップで拡大（同一ページ内）
+    const dlg = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lbImg');
+    const lbCap = document.getElementById('lbCap');
+    const closeBtn = document.getElementById('lbClose');
+
+    document.querySelectorAll('a.zoom').forEach(a => {
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        const href = a.getAttribute('href');
+        const cap = a.dataset.caption || '';
+        const imgEl = a.querySelector('img');
+        lbImg.src = href;
+        lbImg.alt = imgEl ? imgEl.alt : '';
+        lbCap.textContent = cap;
+        dlg.showModal();
+      });
+    });
+
+    closeBtn.addEventListener('click', () => dlg.close());
+    dlg.addEventListener('click', (e) => {
+      // 背景クリックで閉じる
+      const rect = dlg.getBoundingClientRect();
+      const inDialog =
+        rect.top <= e.clientY && e.clientY <= rect.top + rect.height &&
+        rect.left <= e.clientX && e.clientX <= rect.left + rect.width;
+      if (!inDialog) dlg.close();
+    });
+  </script>
+</body>
+</html>
