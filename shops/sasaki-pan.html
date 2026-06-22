@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>グリル・喫茶 クレタケ（京都・伏見桃山）｜暮らしと喫茶の手帖</title>
-  <meta name="description" content="また行きたくなる洋食と喫茶">
+  <title>ササキパン本店（京都・伏見桃山）｜暮らしと喫茶の手帖</title>
+  <meta name="description" content="京都の商店街で、気負わずにすき焼き。名代キムラの入口、のれん、鍋の景色と、旅の記憶。">
 
   <style>
     :root{
@@ -194,58 +194,93 @@
       color:rgba(255,255,255,.85);
     }
     
-    .related-mini{
-  margin:24px 0;
+    .photo-grid{
+  display:grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap:12px;
+  margin:18px 0;
 }
 
-.related-mini a{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  padding:10px;
+.photo-grid figure{
+  margin:0;
+}
+
+.photo-grid .zoom{
+  display:block;
+}
+
+.photo-grid img{
+  width:100%;
+  aspect-ratio:4/5;
+  object-fit:cover;
+  display:block;
+  border-radius:14px;
   border:1px solid var(--line);
-  border-radius:12px;
+  box-shadow:0 8px 18px rgba(0,0,0,.08);
+}
+
+.photo-grid figcaption{
+  margin-top:6px;
+  font-size:12px;
+  color:rgba(0,0,0,.65);
+  line-height:1.5;
+}
+
+.related-card{
+  margin:30px 0;
+}
+
+.related-card a{
+  display:flex;
+  gap:12px;
+  align-items:center;
   text-decoration:none;
   color:inherit;
   background:#fff;
+  border:1px solid var(--line);
+  border-radius:14px;
+  overflow:hidden;
+  box-shadow:0 6px 16px rgba(0,0,0,.06);
 }
 
-.related-mini img{
-  width:72px;
-  height:72px;
+.related-card img{
+  width:110px;
+  height:110px;
   object-fit:cover;
-  border-radius:8px;
   flex-shrink:0;
 }
 
-.related-mini-label{
-  display:inline-block;
+.related-text{
+  padding:10px 12px 10px 0;
+}
+
+.related-label{
+  margin:0 0 4px;
   font-size:11px;
-  color:#!important;666;
-  margin-bottom:2px;
+  color:#777;
 }
 
-.related-mini-title{
-  margin:0;
-  font-size:13px;
+.related-title{
+  margin:0 0 4px;
   font-weight:700;
+  font-size:14px;
 }
 
-.related-mini-desc{
-  margin:2px 0 0;
+.related-desc{
+  margin:0;
   font-size:12px;
   color:#666;
-  line-height:1.4;
+  line-height:1.5;
 }
-</style>
-  </head>
+  </style>
+</head>
 
 <body>
   <main>
     <p class="back"><a href="../index.html">← トップへ戻る</a></p>
 
-    <h1>グリル・喫茶 クレタケ（京都・伏見桃山）</h1>
-    <p class="lead">また行きたくなる洋食と喫茶</p>
+    <h1>ササキパン本店（京都・伏見桃山））</h1>
+    <p class="lead">商店街の途中で、思わず足を止めたパン屋。</p>
 
     <section class="card">
       <div class="mat">
@@ -255,138 +290,86 @@
       </div>
 
       <div class="article clearfix">
-       <p>
-  喫茶店でご飯がおいしいお店って、どうしてこんなに「また行こうね」と言いたくなるのだろう。
+      <p>
+  伏見桃山駅を降りると、まず迎えてくれるのが大手筋商店街だ。地元の人も観光客も行き交い、今どき珍しいほどの活気がある。商店街というだけで少し懐かしい気持ちになるのに、ここはその賑わいも相まって歩いているだけで胸が躍る。
 </p>
 
 <p>
-  グリル・喫茶 クレタケで選んだのは、ミックスグリル。食べたいものがひとつに決まらない私には、まさにぴったりの一皿だった。
+  そんな商店街をしばらく進むと、通り過ぎるわけにはいかないパン屋が現れる。ササキパン本店だ。
 </p>
 
-<figure class="insert left">
-  <a class="zoom" href="../images/kuretake-01.jpg" data-caption="たべたいものが全部のってる">
-    <img class="photo" src="../images/kuretake-01.jpg" alt="グリル・喫茶 クレタケのミックスグリル">
-  </a>
-  <figcaption>ミックスグリル。</figcaption>
-</figure>
+<div class="photo-grid">
+  <figure>
+    <a class="zoom" href="../images/sasaki-pan-1.jpg" data-caption="商店街を歩いていると自然と目に入る赤い看板。">
+      <img src="../images/sasaki-pan-1.jpg" alt="ササキパン本店の外観" loading="lazy">
+    </a>
+    <figcaption>商店街を歩いていると自然と目に入る赤い看板。</figcaption>
+  </figure>
+
+  <figure>
+    <a class="zoom" href="../images/sasaki-pan-2.jpg" data-caption="気づけばトレーいっぱい。どれにするか迷う時間も楽しい。">
+      <img src="../images/sasaki-pan-2.jpg" alt="ササキパン本店のパン" loading="lazy">
+    </a>
+    <figcaption>パン袋のデザインが可愛過ぎる</figcaption>
+  </figure>
+</div>
 
 <p>
-  小ぶりなコロッケと、カニクリームコロッケ。同じお皿の上で、このふたつを一緒に食べられる嬉しさ。そこにエビフライまで並んでいる。
-</p>
-
-<p>
-  エビフライにはタルタルソースが添えられていて、それがまたしっかりおいしい。ミックスグリルを食べながら、もう次はエビフライのプレートにしようかな、と考えてしまった。
-</p>
-
-
-<p>
-  最近改装されたらしい店内は新しさもありながら、店の外に並ぶ食品サンプルや、店内に残る空気の中に、長く続いてきたお店の時間がきちんと感じられる。
-</p>
-
-<figure class="insert right">
-  <a class="zoom" href="../images/kuretake-02.jpg" data-caption="食品サンプル。">
-    <img class="photo" src="../images/kuretake-02.jpg" alt="グリル・喫茶 食品サンプル">
-  </a>
-  <figcaption>前の店舗からあったのかな。</figcaption>
-</figure>
-
-<p>
-  デザートまで食べたいものに溢れていて、ひとつに絞るのが大変だった。選んだフルーツパフェは、あっさりとしたフルーツシャーベットと、重たくないソフトクリームのバランスがよくて、食後でもすっと入っていく。
+  まず目を引くのは、どこか懐かしいフォントの看板やパン袋たちだ。長く愛されてきた店なのだろうと感じさせる雰囲気がありながら、店内には思わず迷ってしまうほどたくさんの種類のパンが並んでいる。
 </p>
 
 <p>
-  これならもうひとつ食べてしまいたい、と思うくらい軽やかな甘さだった。
+  あれも気になる、これも気になると選んでいるうちに、気づけばトレーがどんどん埋まっていく。そのトレーがまた可愛かった。オレンジ色の花の形をしたトレーにパンが並んでいく光景がなんとも楽しい。ただ、この日は店内が賑わっていて写真は断念。ぜひ実際に訪れて見てほしい。
 </p>
 
 <p>
-  お昼時はかなり賑わっていたので、子連れなら少し時間をずらすのが安心かもしれない。
+  肝心の味も期待を裏切らなかった。昔ながらのパン屋と聞くと、どこかずっしりと重たいパンを想像してしまうのだが、こちらはふわふわでしっとり。気づけばあっという間に食べ終わっていた。
 </p>
 
 <p>
-  また行こうね。そう言いながら帰りたくなるお店だった。
+  商店街を歩く楽しさも、パンを選ぶ楽しさも、持ち帰って食べる楽しさもある。また伏見桃山を訪れたら、きっと立ち寄ると思う。
 </p>
-  <div class="related-mini">
-  <a href="sasaki-pan.html">
-    <img src="../images/sasaki-pan-2.jpg" alt="ササキパン本店">
+<div class="related-card">
+  <a href="kuretake.html">
+    <img src="../images/kuretake-02.jpg" alt="グリル・喫茶 クレタケ">
 
-    <div class="related-mini-text">
-      <span class="related-mini-label">ここから徒歩数分のおすすめ</span>
+    <div class="related-text">
+      <p class="related-label">ここから徒歩数分</p>
 
-      <p class="related-mini-title">
-        ササキパン本店（京都・伏見桃山）
+      <p class="related-title">
+        グリル・喫茶 クレタケ（京都・伏見桃山）
       </p>
 
-      <p class="related-mini-desc">
-        クレタケからすぐ。活気ある大手筋商店街にある、また立ち寄りたくなるパン屋。
+      <p class="related-desc">
+        ササキパンからすぐ。洋食と喫茶を楽しめる、また立ち寄りたくなる一軒。
       </p>
     </div>
   </a>
 </div>
+  </a>
+</div>
 
       
+      </div>
 
       <!-- 基本情報（ここはあなたが後で正確に埋められるよう、枠だけ用意） -->
-    <div class="info">
-
+      <div class="info">
   <h2>基本情報</h2>
-
   <ul>
-
-    <li>
-      <strong>住所：</strong>
-      〒612-8083 京都府京都市伏見区京町4-170
-    </li>
-
-    <li>
-      <strong>電話番号：</strong>
-      <a href="tel:+81756119282">075-611-9282</a>
-    </li>
-
-    <li>
-      <strong>営業時間：</strong>
-      8:00〜20:00（L.O.19:00）<br>
-      ランチ提供は14:00まで（変更の可能性あり）
-    </li>
-
-    <li>
-      <strong>定休日：</strong>
-      不定休（訪問前に要確認）
-    </li>
-
-    <li>
-      <strong>アクセス：</strong>
-      京阪「伏見桃山駅」徒歩約2分<br>
-      近鉄「桃山御陵前駅」徒歩約2分
-    </li>
-
-    <li>
-      <strong>喫煙：</strong>
-      全席禁煙・喫煙ルームあり
-    </li>
-    
-    <li>
-  <strong>Googleマップ：</strong>
-  <a href="https://www.google.com/maps/search/?api=1&query=グリル・喫茶+クレタケ+伏見桃山" target="_blank">
-    地図を見る
-  </a>
-</li>
-
-
-
-    <li>
-      <strong>公式Instagram：</strong>
-      <a href="https://www.instagram.com/kuretake_fushimi/" target="_blank">
-        ここから開く
-      </a>
-    </li>
-
+    <li>店名：ササキパン本店</li>
+    <li>住所：京都府京都市伏見区伯耆町1</li>
+    <li>電話：075-611-1534</li>
+    <li>営業時間：7:00～19:00</li>
+    <li>定休日：日曜日</li>
+    <li>アクセス：京阪伏見桃山駅・近鉄桃山御陵前駅から徒歩約5分</li>
+    <li>喫煙：なし</li>
+    <li>ベビーカー：利用しやすい</li>
+    <li>訪問日時：2026年○月</li>
+    <li><a href="https://maps.google.com/?q=ササキパン本店" target="_blank">Googleマップ</a></li>
   </ul>
-
-  <p class="note">
-    ※営業時間・定休日などは変更される場合があります。訪問前に公式情報をご確認ください。
-  </p>
-
 </div>
+
+  
     </section>
 
     <!-- Lightbox -->
