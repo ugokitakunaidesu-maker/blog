@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>純喫茶 フロリダ（神奈川・大和）｜暮らしと喫茶の手帖</title>
+  <meta name="description" content="京都の商店街で、気負わずにすき焼き。名代キムラの入口、のれん、鍋の景色と、旅の記憶。">
+
+  <style>
+    :root{
+      --bg:#faf7ef;
+      --ink:#222;
+      --card:#fff;
+      --mat:#fff8ea;
+      --line:rgba(0,0,0,.10);
+      --shadow:0 10px 24px rgba(0,0,0,.08);
+      --radius:18px;
+      --radius2:14px;
+    }
+
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--ink);
+      font-family: system-ui, -apple-system, "Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+      line-height:1.95;
+    }
+
+    main{
+      max-width:860px;
+      margin:0 auto;
+      padding:18px 16px 56px;
+    }
+
+    /* 上の戻るリンク */
+    .back{
+      margin:10px 0 18px;
+      font-size:14px;
+    }
+    .back a{
+      color:var(--ink);
+      text-decoration:none;
+      border-bottom:1px solid rgba(0,0,0,.25);
+      padding-bottom:2px;
+    }
+
+    /* 見出し */
+    h1{
+      margin:10px 0 14px;
+      font-size:26px;
+      letter-spacing:.02em;
+    }
+    .lead{
+      margin:0 0 18px;
+      color:rgba(0,0,0,.75);
+      font-size:14px;
+    }
+
+    /* 記事カード */
+    .card{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .mat{
+      padding:18px;
+      background:linear-gradient(180deg, var(--mat), rgba(255,248,234,0));
+      border-bottom:1px solid var(--line);
+    }
+
+    /* 記事本文 */
+    .article{
+      padding:18px;
+    }
+    .article p{
+      margin:0 0 14px;
+      font-size:16px;
+    }
+
+    /* 雑誌っぽい “文章の中の差し込み写真” */
+    figure.insert{
+      margin:10px 0 16px;
+    }
+
+    /* 画像本体（小さめ＋角丸＋枠） */
+    .photo{
+      display:block;
+      width:100%;
+      max-width:360px;          /* ← 小さめの上限 */
+      border-radius:var(--radius2);
+      border:1px solid var(--line);
+      box-shadow:0 8px 18px rgba(0,0,0,.08);
+      background:#fff;
+    }
+
+    /* PCは左右に回り込み（雑誌っぽい） */
+    @media (min-width: 760px){
+      figure.insert.left  { float:left;  margin:6px 18px 10px 0; }
+      figure.insert.right { float:right; margin:6px 0 10px 18px; }
+      figure.insert .photo{ max-width:340px; }
+    }
+
+    /* キャプション */
+    figcaption{
+      margin-top:8px;
+      font-size:12px;
+      color:rgba(0,0,0,.62);
+    }
+
+    /* クリックできる感じ */
+    .zoom{
+      display:inline-block;
+      text-decoration:none;
+      color:inherit;
+      cursor:zoom-in;
+    }
+
+    /* float解除 */
+    .clearfix::after{
+      content:"";
+      display:block;
+      clear:both;
+    }
+
+    /* 基本情報（箇条書き） */
+    .info{
+      margin-top:14px;
+      padding:16px;
+      border-top:1px solid var(--line);
+      background:rgba(255,255,255,.55);
+    }
+    .info h2{
+      font-size:15px;
+      margin:0 0 10px;
+    }
+    .info ul{
+      margin:0;
+      padding-left:18px;
+      font-size:14px;
+    }
+    .info li{
+      margin:6px 0;
+    }
+    .info a{
+      color:var(--ink);
+      text-decoration:none;
+      border-bottom:1px solid rgba(0,0,0,.25);
+      padding-bottom:2px;
+      word-break:break-word;
+    }
+
+    /* ====== 拡大表示（dialog） ====== */
+    dialog#lightbox{
+      width:min(92vw, 900px);
+      border:none;
+      border-radius:16px;
+      padding:0;
+      box-shadow:0 20px 60px rgba(0,0,0,.35);
+      background:#111;
+      color:#fff;
+    }
+    dialog#lightbox::backdrop{
+      background:rgba(0,0,0,.55);
+    }
+    .lb-wrap{
+      position:relative;
+      padding:10px;
+    }
+    #lbImg{
+      width:100%;
+      height:auto;
+      display:block;
+      border-radius:12px;
+      background:#000;
+    }
+    .lb-close{
+      position:absolute;
+      top:10px;
+      right:10px;
+      border:none;
+      background:rgba(255,255,255,.14);
+      color:#fff;
+      padding:10px 12px;
+      border-radius:999px;
+      cursor:pointer;
+      font-size:14px;
+    }
+    .lb-cap{
+      padding:10px 12px 14px;
+      font-size:13px;
+      color:rgba(255,255,255,.85);
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <p class="back"><a href="../index.html">← トップへ戻る</a></p>
+
+    <h1>純喫茶 フロリダ（神奈川・大和）</h1>
+    <p class="lead">大和駅前に残る、今も愛され続ける昔ながらの純喫茶。</p>
+
+    <section class="card">
+      <div class="mat">
+        <div style="font-size:14px; color:rgba(0,0,0,.7);">
+          写真はタップで拡大できます。
+        </div>
+      </div>
+
+      <div class="article clearfix">
+      
+      <!-- florida.html 全文貼り替え用 -->
+<!-- 画像名：florida-01.jpg〜florida-06.jpg -->
+
+<style>
+.photo-grid{
+  display:grid;
+  grid-template-columns:repeat(2, 1fr);
+  gap:12px;
+  margin:18px 0;
+}
+
+.photo-grid figure:only-child{
+  grid-column:1 / -1;
+  max-width:320px;
+  margin:auto;
+}
+.photo-grid figure{
+  margin:0;
+}
+.photo-grid .zoom{
+  display:block;
+}
+.photo-grid img{
+  width:100%;
+  aspect-ratio:4/5;
+  object-fit:cover;
+  display:block;
+  border-radius:14px;
+  border:1px solid var(--line);
+  box-shadow:0 8px 18px rgba(0,0,0,.08);
+}
+.photo-grid figcaption{
+  margin-top:6px;
+  font-size:12px;
+  color:rgba(0,0,0,.65);
+  line-height:1.5;
+}
+</style>
+
+<h1>純喫茶 フロリダ（神奈川・大和）</h1>
+
+<p>
+  大和駅のすぐ横。図書館が充実しているので大和駅へ出かけることが多いのだが、駅を出るたびに目を引くのが、この純喫茶フロリダだ。
+</p>
+
+<div class="photo-grid">
+  <figure>
+    <a class="zoom" href="../images/florida-01.jpg" data-caption="純喫茶フロリダの外観">
+      <img src="../images/florida-01.jpg" alt="純喫茶フロリダの外観" loading="lazy">
+    </a>
+    <figcaption>大和駅前でひときわ目を引く外観。</figcaption>
+  </figure>
+
+  <figure>
+    <a class="zoom" href="../images/florida-02.jpg" data-caption="純喫茶フロリダの階段">
+      <img src="../images/florida-02.jpg" alt="純喫茶フロリダの階段" loading="lazy">
+    </a>
+    <figcaption>少し急な階段の先に、昔ながらの喫茶店が待っている。</figcaption>
+  </figure>
+</div>
+
+<p>
+  少し急な階段を上がった先にある店内は、分煙ではあるものの、たばこを楽しまれる方も多い印象。そんな空気も含めて昔ながらの喫茶店らしさが残っている。子連れでは少しハードルを感じるかもしれないが、それでも一度は訪れてみたくなる魅力がある。
+</p>
+
+<p>
+  私たちはお昼時に訪れたため店内は満席に近く、若い女性、仕事の合間らしいサラリーマン、高齢の女性同士のグループなど、実に幅広い客層で賑わっていた。飲み屋街の多い大和駅前らしく、こうした昔ながらの喫茶店が今も愛されている理由がよく分かる。
+</p>
+
+<div class="photo-grid">
+  <figure>
+    <a class="zoom" href="../images/florida-03.jpg" data-caption="食品サンプル">
+      <img src="../images/florida-03.jpg" alt="食品サンプル" loading="lazy">
+    </a>
+    <figcaption>ショーケースを眺める時間も純喫茶の楽しみ。</figcaption>
+  </figure>
+
+  <figure>
+    <a class="zoom" href="../images/florida-04.jpg" data-caption="ナポリタン">
+      <img src="../images/florida-04.jpg" alt="ナポリタン" loading="lazy">
+    </a>
+    <figcaption>また食べたくなる、喫茶店の王道ナポリタン。</figcaption>
+  </figure>
+</div>
+
+<p>
+  この日はたまたま店員さんが一人で切り盛りしており、最初は「パフェは難しいです」と案内された。しかし、忙しい中でも「かわいいお子さんたちに」と用意してくださり、運ばれてきたパフェに子どもたちは大喜び。その優しさがとても印象に残っている。
+</p>
+
+<div class="photo-grid">
+  <figure>
+    <a class="zoom" href="../images/florida-05.jpg" data-caption="チョコレートパフェ">
+      <img src="../images/florida-05.jpg" alt="チョコレートパフェ" loading="lazy">
+    </a>
+    <figcaption>子どもたちが歓声をあげたチョコレートパフェ。</figcaption>
+  </figure>
+
+      
+      
+      </div>
+
+      <!-- 基本情報（ここはあなたが後で正確に埋められるよう、枠だけ用意） -->
+      
+      <div class="info">
+  <h2>基本情報</h2>
+  <ul>
+    <li>店名：純喫茶 フロリダ</li>
+    <li>住所：神奈川県大和市大和南1-4-2</li>
+    <li>電話：046-263-5923</li>
+    <li>営業時間：9:00～19:30（変更の可能性あり）</li>
+    <li>定休日：日曜日（変更の可能性あり）</li>
+    <li>喫煙：分煙（訪問時）</li>
+    <li>ベビーカー：階段利用のためやや難しめ</li>
+    <li>アクセス：小田急線・相鉄線 大和駅から徒歩約2分</li>
+    <li>訪問日時：2025年</li>
+    <li><a href="https://maps.google.com/?q=純喫茶+フロリダ+大和" target="_blank">Googleマップ</a></li>
+  </ul>
+</div>
+
+  
+    </section>
+
+    <!-- Lightbox -->
+    <dialog id="lightbox">
+      <div class="lb-wrap">
+        <button class="lb-close" id="lbClose" type="button">閉じる</button>
+        <img id="lbImg" alt="">
+        <div class="lb-cap" id="lbCap"></div>
+      </div>
+    </dialog>
+  </main>
+
+  <script>
+    // タップで拡大（同一ページ内）
+    const dlg = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lbImg');
+    const lbCap = document.getElementById('lbCap');
+    const closeBtn = document.getElementById('lbClose');
+
+    document.querySelectorAll('a.zoom').forEach(a => {
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        const href = a.getAttribute('href');
+        const cap = a.dataset.caption || '';
+        const imgEl = a.querySelector('img');
+        lbImg.src = href;
+        lbImg.alt = imgEl ? imgEl.alt : '';
+        lbCap.textContent = cap;
+        dlg.showModal();
+      });
+    });
+
+    closeBtn.addEventListener('click', () => dlg.close());
+    dlg.addEventListener('click', (e) => {
+      // 背景クリックで閉じる
+      const rect = dlg.getBoundingClientRect();
+      const inDialog =
+        rect.top <= e.clientY && e.clientY <= rect.top + rect.height &&
+        rect.left <= e.clientX && e.clientX <= rect.left + rect.width;
+      if (!inDialog) dlg.close();
+    });
+  </script>
+</body>
+</html>
