@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>コーヒーの大学院 ルミエール・ド・パリ（横浜・関内）｜暮らしと喫茶の手帖</title>
+  <meta name="description" content="京都の商店街で、気負わずにすき焼き。名代キムラの入口、のれん、鍋の景色と、旅の記憶。">
+
+  <style>
+    :root{
+      --bg:#faf7ef;
+      --ink:#222;
+      --card:#fff;
+      --mat:#fff8ea;
+      --line:rgba(0,0,0,.10);
+      --shadow:0 10px 24px rgba(0,0,0,.08);
+      --radius:18px;
+      --radius2:14px;
+    }
+
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--ink);
+      font-family: system-ui, -apple-system, "Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+      line-height:1.95;
+    }
+
+    main{
+      max-width:860px;
+      margin:0 auto;
+      padding:18px 16px 56px;
+    }
+
+    /* 上の戻るリンク */
+    .back{
+      margin:10px 0 18px;
+      font-size:14px;
+    }
+    .back a{
+      color:var(--ink);
+      text-decoration:none;
+      border-bottom:1px solid rgba(0,0,0,.25);
+      padding-bottom:2px;
+    }
+
+    /* 見出し */
+    h1{
+      margin:10px 0 14px;
+      font-size:26px;
+      letter-spacing:.02em;
+    }
+    .lead{
+      margin:0 0 18px;
+      color:rgba(0,0,0,.75);
+      font-size:14px;
+    }
+
+    /* 記事カード */
+    .card{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .mat{
+      padding:18px;
+      background:linear-gradient(180deg, var(--mat), rgba(255,248,234,0));
+      border-bottom:1px solid var(--line);
+    }
+
+    /* 記事本文 */
+    .article{
+      padding:18px;
+    }
+    .article p{
+      margin:0 0 14px;
+      font-size:16px;
+    }
+
+    /* 雑誌っぽい “文章の中の差し込み写真” */
+    figure.insert{
+      margin:10px 0 16px;
+    }
+
+    /* 画像本体（小さめ＋角丸＋枠） */
+    .photo{
+      display:block;
+      width:100%;
+      max-width:360px;          /* ← 小さめの上限 */
+      border-radius:var(--radius2);
+      border:1px solid var(--line);
+      box-shadow:0 8px 18px rgba(0,0,0,.08);
+      background:#fff;
+    }
+
+    /* PCは左右に回り込み（雑誌っぽい） */
+    @media (min-width: 760px){
+      figure.insert.left  { float:left;  margin:6px 18px 10px 0; }
+      figure.insert.right { float:right; margin:6px 0 10px 18px; }
+      figure.insert .photo{ max-width:340px; }
+    }
+
+    /* キャプション */
+    figcaption{
+      margin-top:8px;
+      font-size:12px;
+      color:rgba(0,0,0,.62);
+    }
+    
+    .photo-grid{
+  display:grid;
+  grid-template-columns:repeat(2, 1fr);
+  gap:12px;
+  margin:18px 0;
+}
+
+.photo-grid figure{
+  margin:0;
+}
+
+.photo-grid figure:only-child{
+  grid-column:1 / -1;
+  max-width:320px;
+  margin:auto;
+}
+
+.photo-grid .zoom{
+  display:block;
+}
+
+.photo-grid img{
+  width:100%;
+  height:180px;
+  object-fit:cover;
+  display:block;
+  border-radius:var(--radius2);
+  border:1px solid var(--line);
+  box-shadow:0 8px 18px rgba(0,0,0,.08);
+  background:#fff;
+}
+
+.photo-grid figcaption{
+  margin-top:6px;
+  font-size:12px;
+  color:rgba(0,0,0,.62);
+  line-height:1.5;
+}
+
+    /* クリックできる感じ */
+    .zoom{
+      display:inline-block;
+      text-decoration:none;
+      color:inherit;
+      cursor:zoom-in;
+    }
+
+    /* float解除 */
+    .clearfix::after{
+      content:"";
+      display:block;
+      clear:both;
+    }
+
+    /* 基本情報（箇条書き） */
+    .info{
+      margin-top:14px;
+      padding:16px;
+      border-top:1px solid var(--line);
+      background:rgba(255,255,255,.55);
+    }
+    .info h2{
+      font-size:15px;
+      margin:0 0 10px;
+    }
+    .info ul{
+      margin:0;
+      padding-left:18px;
+      font-size:14px;
+    }
+    .info li{
+      margin:6px 0;
+    }
+    .info a{
+      color:var(--ink);
+      text-decoration:none;
+      border-bottom:1px solid rgba(0,0,0,.25);
+      padding-bottom:2px;
+      word-break:break-word;
+    }
+
+    /* ====== 拡大表示（dialog） ====== */
+    dialog#lightbox{
+      width:min(92vw, 900px);
+      border:none;
+      border-radius:16px;
+      padding:0;
+      box-shadow:0 20px 60px rgba(0,0,0,.35);
+      background:#111;
+      color:#fff;
+    }
+    dialog#lightbox::backdrop{
+      background:rgba(0,0,0,.55);
+    }
+    .lb-wrap{
+      position:relative;
+      padding:10px;
+    }
+    #lbImg{
+      width:100%;
+      height:auto;
+      display:block;
+      border-radius:12px;
+      background:#000;
+    }
+    .lb-close{
+      position:absolute;
+      top:10px;
+      right:10px;
+      border:none;
+      background:rgba(255,255,255,.14);
+      color:#fff;
+      padding:10px 12px;
+      border-radius:999px;
+      cursor:pointer;
+      font-size:14px;
+    }
+    .lb-cap{
+      padding:10px 12px 14px;
+      font-size:13px;
+      color:rgba(255,255,255,.85);
+    }
+    
+  .order-box{
+  margin:36px 0;
+  padding:20px 22px;
+  background:#fffdf8;
+  border:2px dashed #d8c8a8;
+  border-radius:18px;
+}
+
+.order-box h2{
+  margin:0 0 14px;
+  font-size:1rem;
+  font-weight:700;
+  color:#8b6b3f;
+}
+
+.order-box ul{
+  list-style:none;
+  padding:0;
+  margin:0;
+}
+
+.order-box li{
+  display:flex;
+  justify-content:space-between;
+  padding:8px 0;
+  border-bottom:1px dotted #ddd;
+}
+
+.price-note{
+  margin-top:12px;
+  font-size:.82rem;
+  color:#888;
+}
+  </style>
+</head>
+
+<body>
+  <main>
+    <p class="back"><a href="../index.html">← トップへ戻る</a></p>
+
+    <h1>コーヒーの大学院 ルミエール・ド・パリ（横浜・関内）</h1>
+    <p class="lead">宮殿のような空間で味わう、一杯のコーヒー。</p>
+
+    <section class="card">
+      <div class="mat">
+        <div style="font-size:14px; color:rgba(0,0,0,.7);">
+          写真はタップで拡大できます。
+        </div>
+      </div>
+
+      <div class="article clearfix">
+      <h1>コーヒーの大学院（横浜・関内）</h1>
+
+<p>
+赤いひさしに掲げられた「大学院」の三文字。
+初めて目にすると、「喫茶店なのに、なぜ大学院？」と足を止めてしまう。
+</p>
+
+<div class="photo-grid">
+  <figure>
+    <a class="zoom" href="../images/daigakuin-01.jpg" data-caption="コーヒーの大学院の外観">
+      <img src="../images/daigakuin-01.jpg" alt="コーヒーの大学院の外観" loading="lazy">
+    </a>
+     <figcaption>赤いひさしと「大学院」の文字に、思わず足が止まる。</figcaption>
+  </figure>
+
+  <figure>
+    <a class="zoom" href="../images/daigakuin-04.jpg" data-caption="店内のシャンデリア">
+      <img src="../images/daigakuin-04.jpg" alt="コーヒーの大学院のシャンデリア" loading="lazy">
+    </a>
+    <figcaption>扉の先には、シャンデリアが輝く別世界。</figcaption>
+  </figure>
+</div>
+
+<p>
+その名には、香り高い一杯のコーヒーを吟味して提供するという創業者の想いが込められている。1974年の創業当時、店名に「大学院」を冠するほど、最高峰のコーヒーを目指した喫茶店だったという。
+</p>
+
+<p>
+扉を開けると、何層にも重なるシャンデリア、天井いっぱいの装飾、色鮮やかなステンドグラス。まるでヨーロッパの宮殿へ迷い込んだような空間が広がる。
+</p>
+
+<p>
+今回はベビーカーで訪れたため、そのことを伝えると裏手の入口を案内してくださった。細やかな気遣いはとてもありがたかったものの、この空間を静かに楽しみに訪れている人も多い。子どもたちがもう少し大きくなり、この雰囲気そのものを味わえる年齢になったら、改めてゆっくり訪れたいと思う。
+</p>
+
+<div class="photo-grid">
+  <figure>
+    <a class="zoom" href="../images/daigakuin-02.jpg" data-caption="フルーツパフェ">
+      <img src="../images/daigakuin-02.jpg" alt="フルーツパフェ" loading="lazy">
+    </a>
+    <figcaption>見た目のバランスと同じくらい味のバランスも抜群。</figcaption>
+  </figure>
+
+  <figure>
+    <a class="zoom" href="../images/daigakuin-03.jpg" data-caption="グラタントースト">
+      <img src="../images/daigakuin-03.jpg" alt="グラタントースト" loading="lazy">
+    </a>
+    <figcaption>アイスコーヒーが銅製の器だとテンションが上がらない？</figcaption>
+  </figure>
+</div>
+
+<p>
+注文したモンブランは、栗の風味がしっかり感じられ甘みが強すぎない。香り高いコーヒーと合わせると、お互いの良さが引き立ち、自然と交互に口へ運んでいた。毎日食べれたらどんなに良いだろう。
+</p>
+
+<div class="photo-grid">
+  <figure>
+    <a class="zoom" href="../images/daigakuin-05.jpg" data-caption="モンブラン">
+      <img src="../images/daigakuin-05.jpg" alt="モンブラン" loading="lazy">
+    </a>
+    <figcaption>このモンブランぜひ食べてほしい。</figcaption>
+  </figure>
+</div>
+
+<p>
+コーヒーは一杯ずつ注文後に豆を挽き、サイフォンで丁寧に抽出されるそうだ。初めて訪れるなら、お店を代表するブレンドから味わってみるのもよさそうだ。
+</p>
+
+<p>
+コーヒーを飲みに行くというより、この空間で時間を過ごしに行く。関内を訪れたら、またこの扉を開けたくなる。そんな喫茶店だった。
+
+
+<div class="order-box">
+  <h2>🍽️今回いただいたもの</h2>
+
+  <ul>
+    <li>グラタントースト　約1,300円</li>
+    <li>アイスコーヒー　―</li>
+    <li>モンブラン　約600円</li>
+    <li>フルーツパフェ　約1,100円</li>
+  </ul>
+
+  <p class="price-note">
+    ※価格は訪問時のものです。変更されている場合があります。
+  </p>
+</div>
+</p>
+      
+      
+      </div>
+
+      <!-- 基本情報（ここはあなたが後で正確に埋められるよう、枠だけ用意） -->
+      <div class="info">
+  <h2>基本情報</h2>
+
+  <table class="info-table">
+    <tr>
+      <th>店名</th>
+      <td>コーヒーの大学院 ルミエール・ド・パリ</td>
+    </tr>
+
+    <tr>
+      <th>住所</th>
+      <td>神奈川県横浜市中区相生町1-18</td>
+    </tr>
+
+    <tr>
+      <th>アクセス</th>
+      <td>JR関内駅から徒歩約5分、みなとみらい線 日本大通り駅から徒歩約4分</td>
+    </tr>
+
+    <tr>
+      <th>営業時間</th>
+      <td>
+        月〜金 10:00〜18:00（L.O.17:00）<br>
+        土・祝 10:30〜18:00（L.O.17:00）
+      </td>
+    </tr>
+
+    <tr>
+      <th>定休日</th>
+      <td>日曜日</td>
+    </tr>
+
+    <tr>
+      <th>予算</th>
+      <td>1,000〜2,000円程度</td>
+    </tr>
+
+    <tr>
+      <th>喫煙</th>
+      <td>全席禁煙</td>
+    </tr>
+
+    <tr>
+      <th>ベビーカー</th>
+      <td>裏口から案内していただけました。落ち着いた雰囲気のお店のため、小さなお子さま連れは時間帯などへの配慮がおすすめです。</td>
+    </tr>
+
+    <tr>
+      <th>支払い</th>
+      <td>現金のみ</td>
+    </tr>
+
+    <tr>
+      <th>訪問日</th>
+      <td>2025年</td>
+    </tr>
+
+    <tr>
+      <th>Google Map</th>
+      <td>
+        <a href="https://maps.google.com/?q=コーヒーの大学院+ルミエール・ド・パリ" target="_blank">
+          Google Mapを見る
+        </a>
+      </td>
+    </tr>
+  </table>
+</div>
+
+  
+    </section>
+
+    <!-- Lightbox -->
+    <dialog id="lightbox">
+      <div class="lb-wrap">
+        <button class="lb-close" id="lbClose" type="button">閉じる</button>
+        <img id="lbImg" alt="">
+        <div class="lb-cap" id="lbCap"></div>
+      </div>
+    </dialog>
+  </main>
+
+  <script>
+    // タップで拡大（同一ページ内）
+    const dlg = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lbImg');
+    const lbCap = document.getElementById('lbCap');
+    const closeBtn = document.getElementById('lbClose');
+
+    document.querySelectorAll('a.zoom').forEach(a => {
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        const href = a.getAttribute('href');
+        const cap = a.dataset.caption || '';
+        const imgEl = a.querySelector('img');
+        lbImg.src = href;
+        lbImg.alt = imgEl ? imgEl.alt : '';
+        lbCap.textContent = cap;
+        dlg.showModal();
+      });
+    });
+
+    closeBtn.addEventListener('click', () => dlg.close());
+    dlg.addEventListener('click', (e) => {
+      // 背景クリックで閉じる
+      const rect = dlg.getBoundingClientRect();
+      const inDialog =
+        rect.top <= e.clientY && e.clientY <= rect.top + rect.height &&
+        rect.left <= e.clientX && e.clientX <= rect.left + rect.width;
+      if (!inDialog) dlg.close();
+    });
+  </script>
+</body>
+</html>
