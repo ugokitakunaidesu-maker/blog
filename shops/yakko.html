@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>やっ古（浅草）<p>｜暮らしと喫茶の手帖</title>
+  <meta name="description" content="京都の商店街で、気負わずにすき焼き。名代キムラの入口、のれん、鍋の景色と、旅の記憶。">
+
+  <style>
+    :root{
+      --bg:#faf7ef;
+      --ink:#222;
+      --card:#fff;
+      --mat:#fff8ea;
+      --line:rgba(0,0,0,.10);
+      --shadow:0 10px 24px rgba(0,0,0,.08);
+      --radius:18px;
+      --radius2:14px;
+    }
+
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--ink);
+      font-family: system-ui, -apple-system, "Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+      line-height:1.95;
+    }
+
+    main{
+      max-width:860px;
+      margin:0 auto;
+      padding:18px 16px 56px;
+    }
+
+    /* 上の戻るリンク */
+    .back{
+      margin:10px 0 18px;
+      font-size:14px;
+    }
+    .back a{
+      color:var(--ink);
+      text-decoration:none;
+      border-bottom:1px solid rgba(0,0,0,.25);
+      padding-bottom:2px;
+    }
+
+    /* 見出し */
+    h1{
+      margin:10px 0 14px;
+      font-size:26px;
+      letter-spacing:.02em;
+    }
+    .lead{
+      margin:0 0 18px;
+      color:rgba(0,0,0,.75);
+      font-size:14px;
+    }
+
+    /* 記事カード */
+    .card{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .mat{
+      padding:18px;
+      background:linear-gradient(180deg, var(--mat), rgba(255,248,234,0));
+      border-bottom:1px solid var(--line);
+    }
+
+    /* 記事本文 */
+    .article{
+      padding:18px;
+    }
+    .article p{
+      margin:0 0 14px;
+      font-size:16px;
+    }
+
+    /* 雑誌っぽい “文章の中の差し込み写真” */
+    figure.insert{
+      margin:10px 0 16px;
+    }
+
+    /* 画像本体（小さめ＋角丸＋枠） */
+    .photo{
+      display:block;
+      width:100%;
+      max-width:360px;          /* ← 小さめの上限 */
+      border-radius:var(--radius2);
+      border:1px solid var(--line);
+      box-shadow:0 8px 18px rgba(0,0,0,.08);
+      background:#fff;
+    }
+
+    /* PCは左右に回り込み（雑誌っぽい） */
+    @media (min-width: 760px){
+      figure.insert.left  { float:left;  margin:6px 18px 10px 0; }
+      figure.insert.right { float:right; margin:6px 0 10px 18px; }
+      figure.insert .photo{ max-width:340px; }
+    }
+
+    /* キャプション */
+    figcaption{
+      margin-top:8px;
+      font-size:12px;
+      color:rgba(0,0,0,.62);
+    }
+    
+    .photo-grid{
+  display:grid;
+  grid-template-columns:repeat(2, 1fr);
+  gap:12px;
+  margin:18px 0;
+}
+
+.photo-grid figure{
+  margin:0;
+}
+
+.photo-grid figure:only-child{
+  grid-column:1 / -1;
+  max-width:320px;
+  margin:auto;
+}
+
+.photo-grid .zoom{
+  display:block;
+}
+
+.photo-grid img{
+  width:100%;
+  aspect-ratio:4/5;
+  object-fit:cover;
+  display:block;
+  border-radius:var(--radius2);
+  border:1px solid var(--line);
+  box-shadow:0 8px 18px rgba(0,0,0,.08);
+  background:#fff;
+}
+
+.photo-grid figcaption{
+  margin-top:6px;
+  font-size:12px;
+  color:rgba(0,0,0,.62);
+  line-height:1.5;
+}
+
+    /* クリックできる感じ */
+    .zoom{
+      display:inline-block;
+      text-decoration:none;
+      color:inherit;
+      cursor:zoom-in;
+    }
+
+    /* float解除 */
+    .clearfix::after{
+      content:"";
+      display:block;
+      clear:both;
+    }
+
+    /* 基本情報（箇条書き） */
+    .info{
+      margin-top:14px;
+      padding:16px;
+      border-top:1px solid var(--line);
+      background:rgba(255,255,255,.55);
+    }
+    .info h2{
+      font-size:15px;
+      margin:0 0 10px;
+    }
+    .info ul{
+      margin:0;
+      padding-left:18px;
+      font-size:14px;
+    }
+    .info li{
+      margin:6px 0;
+    }
+    .info a{
+      color:var(--ink);
+      text-decoration:none;
+      border-bottom:1px solid rgba(0,0,0,.25);
+      padding-bottom:2px;
+      word-break:break-word;
+    }
+
+    /* ====== 拡大表示（dialog） ====== */
+    dialog#lightbox{
+      width:min(92vw, 900px);
+      border:none;
+      border-radius:16px;
+      padding:0;
+      box-shadow:0 20px 60px rgba(0,0,0,.35);
+      background:#111;
+      color:#fff;
+    }
+    dialog#lightbox::backdrop{
+      background:rgba(0,0,0,.55);
+    }
+    .lb-wrap{
+      position:relative;
+      padding:10px;
+    }
+    #lbImg{
+      width:100%;
+      height:auto;
+      display:block;
+      border-radius:12px;
+      background:#000;
+    }
+    .lb-close{
+      position:absolute;
+      top:10px;
+      right:10px;
+      border:none;
+      background:rgba(255,255,255,.14);
+      color:#fff;
+      padding:10px 12px;
+      border-radius:999px;
+      cursor:pointer;
+      font-size:14px;
+    }
+    .lb-cap{
+      padding:10px 12px 14px;
+      font-size:13px;
+      color:rgba(255,255,255,.85);
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <p class="back"><a href="../index.html">← トップへ戻る</a></p>
+
+    <h1>やっ古（浅草）</h1>
+    <p class="lead">暑い日でも並んで食べたい、浅草の老舗うなぎ店。</p>
+
+    <section class="card">
+      <div class="mat">
+        <div style="font-size:14px; color:rgba(0,0,0,.7);">
+          写真はタップで拡大できます。
+        </div>
+      </div>
+
+      <div class="article clearfix">
+      <p>
+浅草でうなぎを食べようと向かったのは、鰻 やっこ。
+</p>
+
+<p>
+人気店とは聞いていたけれど、夏の浅草で並ぶのはなかなか気合いがいる。それでも、待っている途中で店内に案内してもらえると、それだけで「もう少し頑張ろう」と不思議とやる気が出てくる。
+</p>
+
+<div class="photo-grid">
+  <figure>
+    <a class="zoom" href="../images/yakko-01.jpg" data-caption="浅草で、ようやくたどり着いた老舗。">
+      <img src="../images/yakko-01.jpg" alt="鰻 やっこの看板" loading="lazy">
+    </a>
+    <figcaption>浅草で、ようやくたどり着いた老舗。</figcaption>
+  </figure>
+
+  <figure>
+    <a class="zoom" href="../images/yakko-02.jpg" data-caption="艶やかなうな重に、思わず見入る。">
+      <img src="../images/yakko-02.jpg" alt="鰻 やっこのうな重" loading="lazy">
+    </a>
+    <figcaption>艶やかなうな重に、思わず見入る。</figcaption>
+  </figure>
+</div>
+
+<p>
+案内されたのは二階の和室。席と席の間隔に少しゆとりがあり、子ども連れにはありがたかった。ベビーカーは畳んで預け、畳の席でほっと腰を落ち着ける。
+</p>
+
+<p>
+運ばれてきたうな重は、艶やかな蒲焼きが重箱いっぱいに広がり、思わず見入ってしまう美しさ。香ばしく焼き上げられた表面と、ふっくらとした身のやわらかさ。甘すぎないたれがご飯によく合い、気づけば夢中で箸が進んでいた。
+</p>
+
+<p>
+鰻 やっこは、寛政年間創業とされる浅草の老舗うなぎ店。長く受け継がれてきた味を、浅草の街中で今も楽しめるのがうれしい。
+</p>
+
+<p>
+鰻 やっこは、寛政年間（1789〜1801年）創業と伝わる、浅草を代表する老舗うなぎ店。二百年以上にわたって暖簾を守り続け、勝海舟やジョン万次郎といった歴史上の人物も訪れたと伝えられている。観光客だけでなく、地元の人にも長く愛されてきた理由が、一口食べると自然と伝わってくる。
+</p>
+
+<p>
+印象的だったのは、お店の方の手際のよさ。次から次へと訪れるお客さんを、素早く案内し、料理を運び、店全体が気持ちよく回っていく。
+</p>
+
+<p>
+並ぶ時間も含めて、浅草らしい思い出になった一日。また浅草を訪れたら、あのうな重を目当てに足を運びたいと思う一軒だった。
+
+<div class="order-box">
+
+<h3>今回注文したもの</h3>
+
+<table class="order-table">
+<tr>
+<th>メニュー</th>
+<th>価格</th>
+</tr>
+
+<tr>
+<td>うな重</td>
+<td>３０００円〜７８００円</td>
+</tr>
+
+</table>
+
+<p class="price-note">
+※価格は訪問時のものです。最新の価格は店舗へご確認ください。
+</p>
+
+</div>
+</p>
+      
+      
+      </div>
+
+      <!-- 基本情報（ここはあなたが後で正確に埋められるよう、枠だけ用意） -->
+      <div class="info">
+
+<h2>基本情報</h2>
+
+<ul>
+<li><strong>店名：</strong>鰻 やっこ</li>
+
+<li><strong>住所：</strong>東京都台東区浅草1-10-2</li>
+
+<li><strong>アクセス：</strong>東京メトロ銀座線 田原町駅から徒歩約3分／浅草駅から徒歩約7分</li>
+
+<li><strong>営業時間：</strong>11:30〜20:30頃<br>※変更になる場合があります。</li>
+
+<li><strong>定休日：</strong>水曜日</li>
+
+<li><strong>子連れ：</strong>2階の和室を利用。席間に少しゆとりがあり、利用しやすい印象。</li>
+
+<li><strong>ベビーカー：</strong>畳んで預かっていただきました。</li>
+
+<li><strong>訪問日：</strong>2025年</li>
+
+<li><strong>Googleマップ：</strong><br>
+<a href="https://maps.google.com/?q=鰻 やっこ 浅草" target="_blank">
+Googleマップで見る
+</a></li>
+
+<li><strong>公式サイト：</strong><br>
+<a href="https://www.asakusa-unagi.com/" target="_blank">
+https://www.asakusa-unagi.com/
+</a></li>
+
+</ul>
+
+</div>
+
+  
+    </section>
+
+    <!-- Lightbox -->
+    <dialog id="lightbox">
+      <div class="lb-wrap">
+        <button class="lb-close" id="lbClose" type="button">閉じる</button>
+        <img id="lbImg" alt="">
+        <div class="lb-cap" id="lbCap"></div>
+      </div>
+    </dialog>
+  </main>
+
+  <script>
+    // タップで拡大（同一ページ内）
+    const dlg = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lbImg');
+    const lbCap = document.getElementById('lbCap');
+    const closeBtn = document.getElementById('lbClose');
+
+    document.querySelectorAll('a.zoom').forEach(a => {
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        const href = a.getAttribute('href');
+        const cap = a.dataset.caption || '';
+        const imgEl = a.querySelector('img');
+        lbImg.src = href;
+        lbImg.alt = imgEl ? imgEl.alt : '';
+        lbCap.textContent = cap;
+        dlg.showModal();
+      });
+    });
+
+    closeBtn.addEventListener('click', () => dlg.close());
+    dlg.addEventListener('click', (e) => {
+      // 背景クリックで閉じる
+      const rect = dlg.getBoundingClientRect();
+      const inDialog =
+        rect.top <= e.clientY && e.clientY <= rect.top + rect.height &&
+        rect.left <= e.clientX && e.clientX <= rect.left + rect.width;
+      if (!inDialog) dlg.close();
+    });
+  </script>
+</body>
+</html>
