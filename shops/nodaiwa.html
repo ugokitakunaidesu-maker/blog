@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>横浜野田岩本店（横浜）｜暮らしと喫茶の手帖</title>
+  <meta name="description" content="京都の商店街で、気負わずにすき焼き。名代キムラの入口、のれん、鍋の景色と、旅の記憶。">
+
+  <style>
+    :root{
+      --bg:#faf7ef;
+      --ink:#222;
+      --card:#fff;
+      --mat:#fff8ea;
+      --line:rgba(0,0,0,.10);
+      --shadow:0 10px 24px rgba(0,0,0,.08);
+      --radius:18px;
+      --radius2:14px;
+    }
+
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--ink);
+      font-family: system-ui, -apple-system, "Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+      line-height:1.95;
+    }
+
+    main{
+      max-width:860px;
+      margin:0 auto;
+      padding:18px 16px 56px;
+    }
+
+    /* 上の戻るリンク */
+    .back{
+      margin:10px 0 18px;
+      font-size:14px;
+    }
+    .back a{
+      color:var(--ink);
+      text-decoration:none;
+      border-bottom:1px solid rgba(0,0,0,.25);
+      padding-bottom:2px;
+    }
+
+    /* 見出し */
+    h1{
+      margin:10px 0 14px;
+      font-size:26px;
+      letter-spacing:.02em;
+    }
+    .lead{
+      margin:0 0 18px;
+      color:rgba(0,0,0,.75);
+      font-size:14px;
+    }
+
+    /* 記事カード */
+    .card{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .mat{
+      padding:18px;
+      background:linear-gradient(180deg, var(--mat), rgba(255,248,234,0));
+      border-bottom:1px solid var(--line);
+    }
+
+    /* 記事本文 */
+    .article{
+      padding:18px;
+    }
+    .article p{
+      margin:0 0 14px;
+      font-size:16px;
+    }
+
+    /* 雑誌っぽい “文章の中の差し込み写真” */
+    figure.insert{
+      margin:10px 0 16px;
+    }
+
+    /* 画像本体（小さめ＋角丸＋枠） */
+    .photo{
+      display:block;
+      width:100%;
+      max-width:360px;          /* ← 小さめの上限 */
+      border-radius:var(--radius2);
+      border:1px solid var(--line);
+      box-shadow:0 8px 18px rgba(0,0,0,.08);
+      background:#fff;
+    }
+
+    /* PCは左右に回り込み（雑誌っぽい） */
+    @media (min-width: 760px){
+      figure.insert.left  { float:left;  margin:6px 18px 10px 0; }
+      figure.insert.right { float:right; margin:6px 0 10px 18px; }
+      figure.insert .photo{ max-width:340px; }
+    }
+
+    /* キャプション */
+    figcaption{
+      margin-top:8px;
+      font-size:12px;
+      color:rgba(0,0,0,.62);
+    }
+    
+    .photo-grid{
+  display:grid;
+  grid-template-columns:repeat(2, 1fr);
+  gap:12px;
+  margin:18px 0;
+}
+
+.photo-grid figure{
+  margin:0;
+}
+
+.photo-grid figure:only-child{
+  grid-column:1 / -1;
+  max-width:320px;
+  margin:auto;
+}
+
+.photo-grid .zoom{
+  display:block;
+}
+
+.photo-grid img{
+  width:100%;
+  aspect-ratio:4/5;
+  object-fit:cover;
+  display:block;
+  border-radius:var(--radius2);
+  border:1px solid var(--line);
+  box-shadow:0 8px 18px rgba(0,0,0,.08);
+  background:#fff;
+}
+
+.photo-grid figcaption{
+  margin-top:6px;
+  font-size:12px;
+  color:rgba(0,0,0,.62);
+  line-height:1.5;
+}
+
+    /* クリックできる感じ */
+    .zoom{
+      display:inline-block;
+      text-decoration:none;
+      color:inherit;
+      cursor:zoom-in;
+    }
+
+    /* float解除 */
+    .clearfix::after{
+      content:"";
+      display:block;
+      clear:both;
+    }
+
+    /* 基本情報（箇条書き） */
+    .info{
+      margin-top:14px;
+      padding:16px;
+      border-top:1px solid var(--line);
+      background:rgba(255,255,255,.55);
+    }
+    .info h2{
+      font-size:15px;
+      margin:0 0 10px;
+    }
+    .info ul{
+      margin:0;
+      padding-left:18px;
+      font-size:14px;
+    }
+    .info li{
+      margin:6px 0;
+    }
+    .info a{
+      color:var(--ink);
+      text-decoration:none;
+      border-bottom:1px solid rgba(0,0,0,.25);
+      padding-bottom:2px;
+      word-break:break-word;
+    }
+
+    /* ====== 拡大表示（dialog） ====== */
+    dialog#lightbox{
+      width:min(92vw, 900px);
+      border:none;
+      border-radius:16px;
+      padding:0;
+      box-shadow:0 20px 60px rgba(0,0,0,.35);
+      background:#111;
+      color:#fff;
+    }
+    dialog#lightbox::backdrop{
+      background:rgba(0,0,0,.55);
+    }
+    .lb-wrap{
+      position:relative;
+      padding:10px;
+    }
+    #lbImg{
+      width:100%;
+      height:auto;
+      display:block;
+      border-radius:12px;
+      background:#000;
+    }
+    .lb-close{
+      position:absolute;
+      top:10px;
+      right:10px;
+      border:none;
+      background:rgba(255,255,255,.14);
+      color:#fff;
+      padding:10px 12px;
+      border-radius:999px;
+      cursor:pointer;
+      font-size:14px;
+    }
+    .lb-cap{
+      padding:10px 12px 14px;
+      font-size:13px;
+      color:rgba(255,255,255,.85);
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <p class="back"><a href="../index.html">← トップへ戻る</a></p>
+
+    <h1>横浜野田岩　本店　（横浜）</h1>
+    <p class="lead">二百年受け継がれる技を、横浜で味わう。</p>
+
+    <section class="card">
+      <div class="mat">
+        <div style="font-size:14px; color:rgba(0,0,0,.7);">
+          写真はタップで拡大できます。
+        </div>
+      </div>
+
+      <div class="article clearfix">
+      <p>
+横浜高島屋で買い物を終えたあと、今日はうなぎを食べようと決めていた。
+</p>
+
+<p>
+向かったのは、高島屋にある野田岩。ところが店先には「本日分売り切れ」の文字が。すっかりうなぎの口になっていた私は、一気に夕食難民になりそうだった。
+</p>
+
+<p>
+それでも諦めきれず調べてみると、少し歩いたところにも野田岩があることを知る。せっかくならと足を延ばしてみることにした。
+</p>
+
+<div class="photo-grid">
+  <figure>
+    <a class="zoom" href="../images/nodaiwa-01.jpg" data-caption="蓋を開けた瞬間、思わず見入ってしまった。">
+      <img src="../images/nodaiwa-01.jpg" alt="野田岩のうな重" loading="lazy">
+    </a>
+    <figcaption>蓋を開けた瞬間、思わず見入ってしまった。</figcaption>
+  </figure>
+
+  <figure>
+    <a class="zoom" href="../images/nodaiwa-02.jpg" data-caption="家族が頼んだ特上に、思わず目移り。">
+      <img src="../images/nodaiwa-02.jpg" alt="野田岩の特上うな重" loading="lazy">
+    </a>
+    <figcaption>家族が頼んだ特上に、思わず目移り。</figcaption>
+  </figure>
+</div>
+
+<p>
+運ばれてきたうな重は、蓋を開けた瞬間に思わず見入ってしまうほど美しい。照りよく焼き上げられた蒲焼きが重箱いっぱいに広がり、「歩いてきてよかった」と自然に思えた。
+</p>
+
+<p>
+ひと口食べると、表面は香ばしく、中はふんわり。甘すぎない上品なたれがご飯によく合い、最後まで飽きることなく箸が進む。
+</p>
+
+<p>
+野田岩は創業約二百年の歴史を持つ老舗うなぎ店。江戸時代から受け継がれてきた焼きの技術と、素材の味を生かした上品なたれで、多くの人に親しまれている。
+</p>
+
+<p>
+売り切れに肩を落としたことも、今ではいい思い出。少し歩いた先で出会えた一杯のうな重は、その日の横浜を締めくくるのにぴったりの味だった。
+</p>
+      
+      
+      </div>
+
+      <!-- 基本情報（ここはあなたが後で正確に埋められるよう、枠だけ用意） -->
+      <div class="info">
+
+<h2>基本情報</h2>
+
+<ul>
+
+<li><strong>店名：</strong>横浜野田岩</li>
+
+<li><strong>住所：</strong>神奈川県横浜市西区北幸2-13-9</li>
+
+<li><strong>アクセス：</strong>JR横浜駅 西口から徒歩約8分</li>
+
+<li><strong>営業時間：</strong><br>
+火～土<br>
+11:30～14:00（L.O.13:30）<br>
+17:00～19:30（L.O.19:00）<br>
+※うなぎが売り切れ次第終了する場合があります。
+</li>
+
+<li><strong>定休日：</strong>月曜日・日曜日（不定休あり）</li>
+
+</ul>
+
+<div class="order-box">
+
+<h3>今回注文したもの</h3>
+
+<table class="order-table">
+<tr>
+<th>メニュー</th>
+<th>価格</th>
+</tr>
+
+<tr>
+<td>うな重（楓）</td>
+<td>約 ¥4,000〜</td>
+</tr>
+
+<tr>
+<td>特上うな重</td>
+<td>約 ¥6,000〜</td>
+</tr>
+
+<tr>
+<td>かさね（白焼き・うな重）</td>
+<td>約 ¥8,000〜</td>
+</tr>
+
+</table>
+
+<p class="price-note">
+※価格は訪問時のものです。最新の価格は店舗へご確認ください。
+</p>
+
+</div>
+
+<ul>
+
+<li><strong>子連れ：</strong>子ども連れで利用しやすい</li>
+
+<li><strong>ベビーカー：</strong>入店可</li>
+
+<li><strong>Googleマップ：</strong><br>
+<a href="https://maps.google.com/?q=横浜野田岩" target="_blank">
+Googleマップで見る
+</a></li>
+
+</ul>
+
+</div>
+
+  
+    </section>
+
+    <!-- Lightbox -->
+    <dialog id="lightbox">
+      <div class="lb-wrap">
+        <button class="lb-close" id="lbClose" type="button">閉じる</button>
+        <img id="lbImg" alt="">
+        <div class="lb-cap" id="lbCap"></div>
+      </div>
+    </dialog>
+  </main>
+
+  <script>
+    // タップで拡大（同一ページ内）
+    const dlg = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lbImg');
+    const lbCap = document.getElementById('lbCap');
+    const closeBtn = document.getElementById('lbClose');
+
+    document.querySelectorAll('a.zoom').forEach(a => {
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        const href = a.getAttribute('href');
+        const cap = a.dataset.caption || '';
+        const imgEl = a.querySelector('img');
+        lbImg.src = href;
+        lbImg.alt = imgEl ? imgEl.alt : '';
+        lbCap.textContent = cap;
+        dlg.showModal();
+      });
+    });
+
+    closeBtn.addEventListener('click', () => dlg.close());
+    dlg.addEventListener('click', (e) => {
+      // 背景クリックで閉じる
+      const rect = dlg.getBoundingClientRect();
+      const inDialog =
+        rect.top <= e.clientY && e.clientY <= rect.top + rect.height &&
+        rect.left <= e.clientX && e.clientX <= rect.left + rect.width;
+      if (!inDialog) dlg.close();
+    });
+  </script>
+</body>
+</html>
