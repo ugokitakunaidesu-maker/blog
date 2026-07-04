@@ -1,0 +1,450 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>鳥ぎん　本店　（銀座）｜暮らしと喫茶の手帖</title>
+  <meta name="description" content="京都の商店街で、気負わずにすき焼き。名代キムラの入口、のれん、鍋の景色と、旅の記憶。">
+
+  <style>
+    :root{
+      --bg:#faf7ef;
+      --ink:#222;
+      --card:#fff;
+      --mat:#fff8ea;
+      --line:rgba(0,0,0,.10);
+      --shadow:0 10px 24px rgba(0,0,0,.08);
+      --radius:18px;
+      --radius2:14px;
+    }
+
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--ink);
+      font-family: system-ui, -apple-system, "Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+      line-height:1.95;
+    }
+
+    main{
+      max-width:860px;
+      margin:0 auto;
+      padding:18px 16px 56px;
+    }
+
+    /* 上の戻るリンク */
+    .back{
+      margin:10px 0 18px;
+      font-size:14px;
+    }
+    .back a{
+      color:var(--ink);
+      text-decoration:none;
+      border-bottom:1px solid rgba(0,0,0,.25);
+      padding-bottom:2px;
+    }
+
+    /* 見出し */
+    h1{
+      margin:10px 0 14px;
+      font-size:26px;
+      letter-spacing:.02em;
+    }
+    .lead{
+      margin:0 0 18px;
+      color:rgba(0,0,0,.75);
+      font-size:14px;
+    }
+
+    /* 記事カード */
+    .card{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .mat{
+      padding:18px;
+      background:linear-gradient(180deg, var(--mat), rgba(255,248,234,0));
+      border-bottom:1px solid var(--line);
+    }
+
+    /* 記事本文 */
+    .article{
+      padding:18px;
+    }
+    .article p{
+      margin:0 0 14px;
+      font-size:16px;
+    }
+
+    /* 雑誌っぽい “文章の中の差し込み写真” */
+    figure.insert{
+      margin:10px 0 16px;
+    }
+
+    /* 画像本体（小さめ＋角丸＋枠） */
+    .photo{
+      display:block;
+      width:100%;
+      max-width:360px;          /* ← 小さめの上限 */
+      border-radius:var(--radius2);
+      border:1px solid var(--line);
+      box-shadow:0 8px 18px rgba(0,0,0,.08);
+      background:#fff;
+    }
+
+    /* PCは左右に回り込み（雑誌っぽい） */
+    @media (min-width: 760px){
+      figure.insert.left  { float:left;  margin:6px 18px 10px 0; }
+      figure.insert.right { float:right; margin:6px 0 10px 18px; }
+      figure.insert .photo{ max-width:340px; }
+    }
+
+    /* キャプション */
+    figcaption{
+      margin-top:8px;
+      font-size:12px;
+      color:rgba(0,0,0,.62);
+    }
+    
+    .photo-grid{
+  display:grid;
+  grid-template-columns:repeat(2, 1fr);
+  gap:12px;
+  margin:18px 0;
+}
+
+.photo-grid figure{
+  margin:0;
+}
+
+.photo-grid figure:only-child{
+  grid-column:1 / -1;
+  max-width:320px;
+  margin:auto;
+}
+
+.photo-grid .zoom{
+  display:block;
+}
+
+.photo-grid img{
+  width:100%;
+  aspect-ratio:4/5;
+  object-fit:cover;
+  display:block;
+  border-radius:var(--radius2);
+  border:1px solid var(--line);
+  box-shadow:0 8px 18px rgba(0,0,0,.08);
+  background:#fff;
+}
+
+.photo-grid figcaption{
+  margin-top:6px;
+  font-size:12px;
+  color:rgba(0,0,0,.62);
+  line-height:1.5;
+}
+
+    /* クリックできる感じ */
+    .zoom{
+      display:inline-block;
+      text-decoration:none;
+      color:inherit;
+      cursor:zoom-in;
+    }
+
+    /* float解除 */
+    .clearfix::after{
+      content:"";
+      display:block;
+      clear:both;
+    }
+
+    /* 基本情報（箇条書き） */
+    .info{
+      margin-top:14px;
+      padding:16px;
+      border-top:1px solid var(--line);
+      background:rgba(255,255,255,.55);
+    }
+    .info h2{
+      font-size:15px;
+      margin:0 0 10px;
+    }
+    .info ul{
+      margin:0;
+      padding-left:18px;
+      font-size:14px;
+    }
+    .info li{
+      margin:6px 0;
+    }
+    .info a{
+      color:var(--ink);
+      text-decoration:none;
+      border-bottom:1px solid rgba(0,0,0,.25);
+      padding-bottom:2px;
+      word-break:break-word;
+    }
+
+    /* ====== 拡大表示（dialog） ====== */
+    dialog#lightbox{
+      width:min(92vw, 900px);
+      border:none;
+      border-radius:16px;
+      padding:0;
+      box-shadow:0 20px 60px rgba(0,0,0,.35);
+      background:#111;
+      color:#fff;
+    }
+    dialog#lightbox::backdrop{
+      background:rgba(0,0,0,.55);
+    }
+    .lb-wrap{
+      position:relative;
+      padding:10px;
+    }
+    #lbImg{
+      width:100%;
+      height:auto;
+      display:block;
+      border-radius:12px;
+      background:#000;
+    }
+    .lb-close{
+      position:absolute;
+      top:10px;
+      right:10px;
+      border:none;
+      background:rgba(255,255,255,.14);
+      color:#fff;
+      padding:10px 12px;
+      border-radius:999px;
+      cursor:pointer;
+      font-size:14px;
+    }
+    .lb-cap{
+      padding:10px 12px 14px;
+      font-size:13px;
+      color:rgba(255,255,255,.85);
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <p class="back"><a href="../index.html">← トップへ戻る</a></p>
+
+    <h1>鳥ぎん　本店</h1>
+    <p class="lead">
+  銀座で子連れの夕食に迷ったとき、思い出したい老舗。焼き鳥と釜飯を囲みながら、大人も息抜きできる。
+</p>
+
+    <section class="card">
+      <div class="mat">
+        <div style="font-size:14px; color:rgba(0,0,0,.7);">
+          写真はタップで拡大できます。
+        </div>
+      </div>
+
+      <div class="article clearfix">
+      
+      <p>
+銀座で買い物をした帰り、子どもを連れての夕食に困った。
+</p>
+
+<p>
+銀座に慣れていれば候補はいくつもあるのだろうけれど、どこも子どもには少し敷居が高そうに見えてしまう。そうして歩いているうちに、お腹だけがどんどん空いていく。
+</p>
+
+<figure class="photo-grid one">
+  <a class="zoom" href="../images/torigin-01.jpg" data-caption="銀座 鳥ぎん本店 外観">
+    <img src="../images/torigin-01.jpg" alt="銀座 鳥ぎん本店 外観">
+  </a>
+</figure>
+
+<p>
+そんな時に思い出したのが、鳥ぎん本店だった。
+</p>
+
+<p>
+大人だけで訪れていた頃、少し早い時間なら子連れの姿を見かけたことがある。もしかしたら大丈夫かもしれないと扉を開けると、そこには我が家よりずっと慣れた様子の家族連れが何組もいた。
+</p>
+
+<p>
+焼き鳥をつまみに一杯、最後は釜飯で締める。そんな昔ながらの一軒なのに、子ども連れが自然に溶け込んでいる光景がなんだか面白い。
+</p>
+
+<p>
+しかも、不思議なくらい子どもたちがおとなしい。「どうやって子育てしていますか？」と聞いてみたくなるほどだ。我が家はそんな余裕はなく、子どもが飽きる前に急いで食べて、急いで飲むのがお決まりである。
+</p>
+
+<figure class="photo-grid two">
+  <a class="zoom" href="../images/torigin-02.jpg" data-caption="炭火で焼き上げられた焼き鳥">
+    <img src="../images/torigin-02.jpg" alt="焼き鳥">
+  </a>
+
+  <a class="zoom" href="../images/torigin-03.jpg" data-caption="名物の釜飯">
+    <img src="../images/torigin-03.jpg" alt="釜飯">
+  </a>
+</figure>
+
+<p>
+1950年創業の鳥ぎん本店は、焼き鳥と釜飯で長く愛され続けてきた銀座の老舗。炭火で香ばしく焼き上げられた焼き鳥は、表面はこんがり、中はふっくら。甘辛いタレは鶏の旨みを引き立て、何本でも食べたくなる飽きのこない味だった。
+</p>
+
+<p>
+そして、最後はやっぱり釜飯。
+</p>
+
+<p>
+蓋を開けると立ち上る湯気と出汁の香りに、いつもほっとする。家で炊く炊き込みご飯は、気付けば醤油を入れすぎているのだと、この釜飯を食べるたびに思う。素材の味を生かした優しい出汁は、お酒で少し尖った胃をゆっくり落ち着かせてくれるようだった。
+</p>
+
+<figure class="photo-grid one">
+  <a class="zoom" href="../images/torigin-04.jpg" data-caption="焼き鳥と釜飯を囲む食卓">
+    <img src="../images/torigin-04.jpg" alt="料理全体">
+  </a>
+</figure>
+
+<p>
+お店の方が子どもにも優しく声をかけてくださるたびに、騒がせてしまわないかと少し申し訳ない気持ちになる。それでも、その温かさに救われながら店をあとにする。
+</p>
+
+<p>
+また、大人の息抜きがしたくなった日にお邪魔したい。
+</p>
+
+<div class="order-box">
+
+<h3>今回注文したもの</h3>
+
+<table class="order-table">
+<tr>
+<th>メニュー</th>
+<th>価格</th>
+</tr>
+
+<tr>
+<td>焼き鳥（たれ）</td>
+<td>¥330</td>
+</tr>
+
+<tr>
+<td>焼き鳥（塩）</td>
+<td>¥330</td>
+</tr>
+
+<tr>
+<td>レバー</td>
+<td>¥330</td>
+</tr>
+
+<tr>
+<td>つくね</td>
+<td>¥330</td>
+</tr>
+
+<tr>
+<td>釜飯</td>
+<td>¥1,200〜</td>
+</tr>
+
+<tr>
+<td>生ビール</td>
+<td>¥770</td>
+</tr>
+
+</table>
+
+<p class="price-note">
+※価格は訪問当時のものです。変更されている場合があります。
+</p>
+
+</div>
+
+</li>
+      
+      
+      </div>
+
+      <!-- 基本情報（ここはあなたが後で正確に埋められるよう、枠だけ用意） -->
+      <div class="info">
+
+<h2>基本情報</h2>
+
+<ul>
+<li><strong>店名：</strong>銀座 鳥ぎん 本店</li>
+<li><strong>住所：</strong>東京都中央区銀座5-5-7</li>
+<li><strong>アクセス：</strong>銀座駅から徒歩約2分</li>
+<li><strong>営業時間：</strong>11:30〜22:00</li>
+<li><strong>定休日：</strong>年末年始など</li>
+
+<!-- ここに注文表（order-box）が入る -->
+
+<li><strong>子連れ：</strong>早い時間帯は利用しやすい印象</li>
+<li><strong>ベビーカー：</strong>店内は座席が多く外に置かせていただいた</li>
+<li><strong>Googleマップ：</strong><br>
+<a href="https://maps.google.com/?q=銀座+鳥ぎん+本店" target="_blank">
+Googleマップで見る
+</a></li>
+
+<li><strong>公式サイト：</strong><br>
+<a href="https://torigin-ginza.jp/" target="_blank">
+https://torigin-ginza.jp/
+</a></li>
+
+</ul>
+
+</div>
+
+
+  
+    </section>
+
+    <!-- Lightbox -->
+    <dialog id="lightbox">
+      <div class="lb-wrap">
+        <button class="lb-close" id="lbClose" type="button">閉じる</button>
+        <img id="lbImg" alt="">
+        <div class="lb-cap" id="lbCap"></div>
+      </div>
+    </dialog>
+  </main>
+
+  <script>
+    // タップで拡大（同一ページ内）
+    const dlg = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lbImg');
+    const lbCap = document.getElementById('lbCap');
+    const closeBtn = document.getElementById('lbClose');
+
+    document.querySelectorAll('a.zoom').forEach(a => {
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        const href = a.getAttribute('href');
+        const cap = a.dataset.caption || '';
+        const imgEl = a.querySelector('img');
+        lbImg.src = href;
+        lbImg.alt = imgEl ? imgEl.alt : '';
+        lbCap.textContent = cap;
+        dlg.showModal();
+      });
+    });
+
+    closeBtn.addEventListener('click', () => dlg.close());
+    dlg.addEventListener('click', (e) => {
+      // 背景クリックで閉じる
+      const rect = dlg.getBoundingClientRect();
+      const inDialog =
+        rect.top <= e.clientY && e.clientY <= rect.top + rect.height &&
+        rect.left <= e.clientX && e.clientX <= rect.left + rect.width;
+      if (!inDialog) dlg.close();
+    });
+  </script>
+</body>
+</html>
