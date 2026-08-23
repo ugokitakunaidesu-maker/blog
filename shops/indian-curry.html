@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>インディアンカレー｜暮らしと喫茶の手帖</title>
+  <meta name="description" content="京都の商店街で、気負わずにすき焼き。名代キムラの入口、のれん、鍋の景色と、旅の記憶。">
+
+  <style>
+    :root{
+      --bg:#faf7ef;
+      --ink:#222;
+      --card:#fff;
+      --mat:#fff8ea;
+      --line:rgba(0,0,0,.10);
+      --shadow:0 10px 24px rgba(0,0,0,.08);
+      --radius:18px;
+      --radius2:14px;
+    }
+
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--ink);
+      font-family: system-ui, -apple-system, "Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+      line-height:1.95;
+    }
+
+    main{
+      max-width:860px;
+      margin:0 auto;
+      padding:18px 16px 56px;
+    }
+
+    /* 上の戻るリンク */
+    .back{
+      margin:10px 0 18px;
+      font-size:14px;
+    }
+    .back a{
+      color:var(--ink);
+      text-decoration:none;
+      border-bottom:1px solid rgba(0,0,0,.25);
+      padding-bottom:2px;
+    }
+
+    /* 見出し */
+    h1{
+      margin:10px 0 14px;
+      font-size:26px;
+      letter-spacing:.02em;
+    }
+    .lead{
+      margin:0 0 18px;
+      color:rgba(0,0,0,.75);
+      font-size:14px;
+    }
+
+    /* 記事カード */
+    .card{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .mat{
+      padding:18px;
+      background:linear-gradient(180deg, var(--mat), rgba(255,248,234,0));
+      border-bottom:1px solid var(--line);
+    }
+
+    /* 記事本文 */
+    .article{
+      padding:18px;
+    }
+    .article p{
+      margin:0 0 14px;
+      font-size:16px;
+    }
+
+    /* 雑誌っぽい “文章の中の差し込み写真” */
+    figure.insert{
+      margin:10px 0 16px;
+    }
+
+    /* 画像本体（小さめ＋角丸＋枠） */
+    .photo{
+      display:block;
+      width:100%;
+      max-width:360px;          /* ← 小さめの上限 */
+      border-radius:var(--radius2);
+      border:1px solid var(--line);
+      box-shadow:0 8px 18px rgba(0,0,0,.08);
+      background:#fff;
+    }
+
+    /* PCは左右に回り込み（雑誌っぽい） */
+    @media (min-width: 760px){
+      figure.insert.left  { float:left;  margin:6px 18px 10px 0; }
+      figure.insert.right { float:right; margin:6px 0 10px 18px; }
+      figure.insert .photo{ max-width:340px; }
+    }
+
+    /* キャプション */
+    figcaption{
+      margin-top:8px;
+      font-size:12px;
+      color:rgba(0,0,0,.62);
+    }
+    
+    .photo-grid{
+  display:grid;
+  grid-template-columns:repeat(2, 1fr);
+  gap:12px;
+  margin:18px 0;
+}
+
+.photo-grid figure{
+  margin:0;
+}
+
+.photo-grid figure:only-child{
+  grid-column:1 / -1;
+  max-width:320px;
+  margin:auto;
+}
+
+.photo-grid .zoom{
+  display:block;
+}
+
+.photo-grid img{
+  width:100%;
+  aspect-ratio:4/5;
+  object-fit:cover;
+  display:block;
+  border-radius:var(--radius2);
+  border:1px solid var(--line);
+  box-shadow:0 8px 18px rgba(0,0,0,.08);
+  background:#fff;
+}
+
+.photo-grid figcaption{
+  margin-top:6px;
+  font-size:12px;
+  color:rgba(0,0,0,.62);
+  line-height:1.5;
+}
+
+    /* クリックできる感じ */
+    .zoom{
+      display:inline-block;
+      text-decoration:none;
+      color:inherit;
+      cursor:zoom-in;
+    }
+
+    /* float解除 */
+    .clearfix::after{
+      content:"";
+      display:block;
+      clear:both;
+    }
+
+    /* 基本情報（箇条書き） */
+    .info{
+      margin-top:14px;
+      padding:16px;
+      border-top:1px solid var(--line);
+      background:rgba(255,255,255,.55);
+    }
+    .info h2{
+      font-size:15px;
+      margin:0 0 10px;
+    }
+    .info ul{
+      margin:0;
+      padding-left:18px;
+      font-size:14px;
+    }
+    .info li{
+      margin:6px 0;
+    }
+    .info a{
+      color:var(--ink);
+      text-decoration:none;
+      border-bottom:1px solid rgba(0,0,0,.25);
+      padding-bottom:2px;
+      word-break:break-word;
+    }
+
+    /* ====== 拡大表示（dialog） ====== */
+    dialog#lightbox{
+      width:min(92vw, 900px);
+      border:none;
+      border-radius:16px;
+      padding:0;
+      box-shadow:0 20px 60px rgba(0,0,0,.35);
+      background:#111;
+      color:#fff;
+    }
+    dialog#lightbox::backdrop{
+      background:rgba(0,0,0,.55);
+    }
+    .lb-wrap{
+      position:relative;
+      padding:10px;
+    }
+    #lbImg{
+      width:100%;
+      height:auto;
+      display:block;
+      border-radius:12px;
+      background:#000;
+    }
+    .lb-close{
+      position:absolute;
+      top:10px;
+      right:10px;
+      border:none;
+      background:rgba(255,255,255,.14);
+      color:#fff;
+      padding:10px 12px;
+      border-radius:999px;
+      cursor:pointer;
+      font-size:14px;
+    }
+    .lb-cap{
+      padding:10px 12px 14px;
+      font-size:13px;
+      color:rgba(255,255,255,.85);
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <p class="back"><a href="../index.html">← トップへ戻る</a></p>
+
+    <h1>インデアンカレー 阪急三番街店｜大阪の名物カレー</h1>
+
+<p class="lead">
+甘くて辛い、また挑みたくなる大阪の味。
+</p>
+
+    <section class="card">
+      <div class="mat">
+        <div style="font-size:14px; color:rgba(0,0,0,.7);">
+          写真はタップで拡大できます。
+        </div>
+      </div>
+
+      <div class="article clearfix">
+      
+      <p>
+大阪駅でお昼ごはんを食べたい時、子ども連れには阪急三番街の梅田フードホールが便利だ。それぞれ食べたいものを選べて、周りに気を使いすぎずに食事ができる。
+</p>
+
+<p>
+でも、そこへ向かう途中、私にはいつも目に留まるお店があった。
+</p>
+
+<p>
+インデアンカレー。
+</p>
+
+<div class="photo-grid">
+  <figure>
+    <a class="zoom"
+       href="../images/indian-curry-01.jpg"
+       data-caption="足を止めずにはいられない、昔ながらの食品サンプル。">
+      <img src="../images/indian-curry-01.jpg"
+           alt="インデアンカレー阪急三番街店の食品サンプル"
+           loading="lazy">
+    </a>
+    <figcaption>
+      足を止めずにはいられない、昔ながらの食品サンプル。
+    </figcaption>
+  </figure>
+
+  <figure>
+    <a class="zoom"
+       href="../images/indian-curry-02.jpg"
+       data-caption="行列の先で待つ、インデアンカレー。">
+      <img src="../images/indian-curry-02.jpg"
+           alt="インデアンカレー阪急三番街店の看板"
+           loading="lazy">
+    </a>
+    <figcaption>
+      行列の先で待つ、インデアンカレー。
+    </figcaption>
+  </figure>
+</div>
+
+<p>
+1947年に大阪で生まれ、今では関西を中心に親しまれている味だという。食券を買い、カウンターでさっと食べるスタイル。具の少ないシンプルなカレーを求めて次々と人が並ぶ光景に、いつもそそられていた。
+</p>
+
+<p>
+ただ、小さな子どもを連れて入るには、なかなか難易度が高い。さすがにここへ一緒に来られるのは、中学生くらいになってからだろうか。
+</p>
+
+<p>
+近くにある阪神梅田本店には、カウンターのほかに少数のテーブル席があり、芦屋のラポルテ西館店には比較的ゆったりしたテーブル席もあるらしい。
+</p>
+
+<p>
+今回は少しだけ一人の時間をもらい、カウンターのみの阪急三番街店を攻めてみた。
+</p>
+
+<div class="photo-grid">
+  <figure>
+    <a class="zoom"
+       href="../images/indian-curry-03.jpg"
+       data-caption="甘さのすぐあとを、鮮烈な辛さが追いかける。">
+      <img src="../images/indian-curry-03.jpg"
+           alt="インデアンカレー"
+           loading="lazy">
+    </a>
+    <figcaption>
+      甘さのすぐあとを、鮮烈な辛さが追いかける。
+    </figcaption>
+  </figure>
+</div>
+
+<p>
+このカレーは、食べ始めにとても甘く、フルーティーな味わいを感じる。ところが、そのあとをすごい速さで辛さが追いかけてくる。
+</p>
+
+<p>
+私はCoCo壱番屋では3辛を選ぶのだが、このカレーは最初に甘さが来るからなのか、気づいた時の辛さがとても強く感じられた。
+</p>
+
+<p>
+ご飯は、食堂の茶碗なら二杯分ほどあるだろうか。具はごろっとした肉だけというシンプルなカレーなのに、甘さと辛さが交互に押し寄せ、もう一口、もう一口と食べ進めてしまう。
+</p>
+
+<p>
+後ろには次々と列が延びていく。その焦燥感も重なり、強い辛さの合間に口へ運ぶ、別皿のキャベツのピクルスがありがたかった。
+</p>
+
+<p>
+普段は量を食べる方だが、このボリュームを大阪の人たちのようなテンポで食べ切るには、もう少し訓練が必要そう。それとも、50円で追加できる生卵が正解なのかな。
+</p>
+
+<p>
+次は、生卵を味方につけて挑戦したい。
+</p>
+      
+      
+      </div>
+
+      <!-- 基本情報（ここはあなたが後で正確に埋められるよう、枠だけ用意） -->
+      
+      <section class="shop-info">
+  <h2>基本情報</h2>
+
+  <table>
+    <tr>
+      <th>店名</th>
+      <td>インデアンカレー 阪急三番街店</td>
+    </tr>
+
+    <tr>
+      <th>住所</th>
+      <td>大阪府大阪市北区芝田1-1-3 阪急三番街 南館B2F</td>
+    </tr>
+
+    <tr>
+      <th>アクセス</th>
+      <td>阪急大阪梅田駅徒歩約1分、JR大阪駅徒歩約2分</td>
+    </tr>
+
+    <tr>
+      <th>営業時間</th>
+      <td>平日 11:00～22:00（L.O.21:45）<br>
+      土日祝 10:00～22:00（L.O.21:45）</td>
+    </tr>
+
+    <tr>
+      <th>定休日</th>
+      <td>不定休</td>
+    </tr>
+
+    <tr>
+      <th>席</th>
+      <td>カウンター席のみ（21席）</td>
+    </tr>
+
+    <tr>
+      <th>子連れ</th>
+      <td>今回は一人で訪問。カウンターのみのため、小さな子ども連れにはややハードルが高そう。</td>
+    </tr>
+
+    <tr>
+      <th>訪問日</th>
+      <td>2026年夏</td>
+    </tr>
+
+    <tr>
+      <th>公式サイト</th>
+      <td><a href="https://www.indiancurry.jp/" target="_blank" rel="noopener">インデアンカレー</a></td>
+    </tr>
+    
+    <tr>
+  <th>Googleマップ</th>
+  <td>
+    <a href="https://www.google.com/maps/search/?api=1&query=インデアンカレー+阪急三番街店"
+       target="_blank" rel="noopener">
+      Googleマップで見る
+    </a>
+  </td>
+</tr>
+  </table>
+</section>
+
+<div class="order-box">
+
+<h3>今回注文したもの</h3>
+
+<table class="order-table">
+<tr>
+<th>メニュー</th>
+<th>価格</th>
+</tr>
+
+<tr>
+<td>インデアンカレー</td>
+<td>930円</td>
+</tr>
+
+<tr>
+<td>生卵（追加）</td>
+<td>＋50円</td>
+</tr>
+
+</table>
+
+<p class="price-note">
+※価格は訪問時のものです。最新の価格は店舗へご確認ください。
+</p>
+
+</div>
+
+  
+    </section>
+
+    <!-- Lightbox -->
+    <dialog id="lightbox">
+      <div class="lb-wrap">
+        <button class="lb-close" id="lbClose" type="button">閉じる</button>
+        <img id="lbImg" alt="">
+        <div class="lb-cap" id="lbCap"></div>
+      </div>
+    </dialog>
+  </main>
+
+  <script>
+    // タップで拡大（同一ページ内）
+    const dlg = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lbImg');
+    const lbCap = document.getElementById('lbCap');
+    const closeBtn = document.getElementById('lbClose');
+
+    document.querySelectorAll('a.zoom').forEach(a => {
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        const href = a.getAttribute('href');
+        const cap = a.dataset.caption || '';
+        const imgEl = a.querySelector('img');
+        lbImg.src = href;
+        lbImg.alt = imgEl ? imgEl.alt : '';
+        lbCap.textContent = cap;
+        dlg.showModal();
+      });
+    });
+
+    closeBtn.addEventListener('click', () => dlg.close());
+    dlg.addEventListener('click', (e) => {
+      // 背景クリックで閉じる
+      const rect = dlg.getBoundingClientRect();
+      const inDialog =
+        rect.top <= e.clientY && e.clientY <= rect.top + rect.height &&
+        rect.left <= e.clientX && e.clientX <= rect.left + rect.width;
+      if (!inDialog) dlg.close();
+    });
+  </script>
+</body>
+</html>
